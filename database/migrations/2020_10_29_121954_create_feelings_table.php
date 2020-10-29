@@ -15,7 +15,7 @@ class CreateFeelingsTable extends Migration
     {
         Schema::create('feelings', function (Blueprint $table) {
             $table->id();
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreignId('student_id')->references('id')->on('students');
             $table->string('score');
             $table->text('comment');
             $table->timestamps();

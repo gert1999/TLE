@@ -15,8 +15,8 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('counselor_id')->references('id')->on('counselors');
+            $table->foreignId('student_id')->references('id')->on('students');
+            $table->foreignId('counselor_id')->references('id')->on('counselors');
             $table->date('appointment_date');
             $table->boolean('attending');
             $table->timestamps();

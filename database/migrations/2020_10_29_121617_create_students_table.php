@@ -24,8 +24,8 @@ class CreateStudentsTable extends Migration
             $table->string('avatar');
             $table->string('password');
             $table->integer('pin');
-            $table->foreign('counselor_id')->references('id')->on('counselors');
-            $table->foreign('class_id')->references('id')->on('classes');
+            $table->foreignId('counselor_id')->references('id')->on('counselors');
+            $table->foreignId('class_id')->references('id')->on('classes');
             $table->timestamps();
         });
     }
