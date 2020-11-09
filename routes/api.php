@@ -16,9 +16,16 @@ use App\Http\Controllers\AppController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('login', [AppController::class, 'login']);
-Route::post('resetpassword', [Appcontroller::class, 'reset']);
+
+Route::group([
+    'middleware' => ['api'],
+    'prefix' => 'v1/application'
+], function(){
+    Route::post('login', [AppController::class, 'login']);
+    Route::post('register', [AppController::class, 'register']);
+    Route::post('resetpassword', [Appcontroller::class, 'reset']);
+})
