@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\counselorsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [counselorsController::class, 'index'])->name('dashboard');
+
+Route::get('/user', [counselorsController::class, 'index']);
