@@ -28,4 +28,4 @@ Route::group([
     Route::post('login', [AppController::class, 'login']);
     Route::post('register', [AppController::class, 'register']);
     Route::post('resetpassword', [Appcontroller::class, 'reset']);
-})
+});
