@@ -27,6 +27,6 @@ class counselorsController extends Controller
             abort(404, "Dit pagina is helaas niet gevonden");
         }
 
-        return view('show', compact('feeling'));
+        return view('show', compact('feeling', $feeling));
     }
 }
