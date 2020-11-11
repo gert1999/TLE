@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feelings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,5 +18,15 @@ class counselorsController extends Controller
             ->get();
 
         return view('dashboard', compact('students', $students));
+    }
+    public function show($id){
+
+        $feeling = Feelings::find($id);
+
+//        if($feeling === null){
+//            abort(404, "Dit pagina is helaas niet gevonden");
+//        }
+
+        return view('show', compact('feeling'));
     }
 }

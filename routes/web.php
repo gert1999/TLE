@@ -21,3 +21,4 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [counselorsController::class, 'index'])->name('dashboard');
 
 Route::get('/user', [counselorsController::class, 'index']);
+Route::get('/show/{id}', [counselorsController::class, 'show'])->name('show');
