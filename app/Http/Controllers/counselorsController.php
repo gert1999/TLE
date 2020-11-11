@@ -23,9 +23,9 @@ class counselorsController extends Controller
 
         $feeling = Feelings::find($id);
 
-//        if($feeling === null){
-//            abort(404, "Dit pagina is helaas niet gevonden");
-//        }
+        if($feeling === null){
+            abort(404, "Dit pagina is helaas niet gevonden");
+        }
 
         return view('show', compact('feeling'));
     }
