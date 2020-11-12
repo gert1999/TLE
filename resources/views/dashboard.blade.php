@@ -42,7 +42,7 @@
                     <td>{{$row->created_at}}</td>
                     <td>
                         <button class="btn"><i class="fa fa-edit"></i></button>
-                        <button class="btn"> <a href="{{route('show', $row->id)}}"><i class="fa fa-signal"></i></a></button>
+                        <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-times"></i></button>
                     </td>
                 </tr>

@@ -21,12 +21,36 @@ class counselorsController extends Controller
     }
     public function show($id){
 
-        $feeling = Feelings::find($id);
+//        $feeling = Feelings::find($id);
+        $feeling = DB::table('feelings')
+            ->where('student_id', $id)
+            ->get();
 
         if($feeling === null){
             abort(404, "Dit pagina is helaas niet gevonden");
         }
 
-        return view('show', compact('feeling', $feeling));
+
+//        $data1 = '';
+
+//        $sql = DB::table('feelings')
+//            ->where('student_id', 2)
+//            ->get();
+//
+////        dd($sql);
+//        foreach($sql as $sql1){
+//
+//            $data1 = $sql1->score;
+//
+////            $data1 = $sql1->score.'",';
+////            dd($data1);
+//
+//        }
+
+//        $data1 = trim($data1,",");
+
+
+
+        return view('show', compact('feeling', 'id'));
     }
 }
