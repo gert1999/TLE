@@ -16,7 +16,6 @@
 
     //loop through the returned data
     while ($row = mysqli_fetch_array($result)) {
-
         $data1 = $data1 . '"'. $row['score'].'",';
     }
 
@@ -24,6 +23,15 @@
 
     $data1 = trim($data1,",");
 
+    $sql2 = "SELECT `created_at` FROM `feelings` WHERE `student_id` = $id";
+    $result2 = mysqli_query($mysqli, $sql2);
+
+    while ($row3 = mysqli_fetch_array($result2))
+    {
+        $data2[] = $row3['created_at'];
+
+    }
+//    dd($data2)
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
 //    $result2 = mysqli_query($mysqli, $sql2);
 //
@@ -33,7 +41,7 @@
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ public_path('css/font-awesome/css/font-awesome.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/nnnick/Chart.js/v1.0.2/Chart.min.js"></script>
@@ -93,12 +101,30 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+
+    <div class="container" style="margin-top:100px;">
+        {{--        <canvas id="chart" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>--}}
+
+        <div class="chartWrapper">
+            <div class="chartAreaWrapper">
+                <canvas id="myChart" class="mydataChart"></canvas>
+            </div>
+            <canvas id="myChartAxis" height="300" width="0"></canvas>
+            <div style="display:none">
+                <img id="source"
+                     src="{{ asset('images\emotie.png') }}"
+                     width="300" height="227">
+            </div>
+        </div>
+    </div>
+
     <div class="container">
-        <table class="table">
+        <table class="table" style="margin-top:100px;">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">score</th>
+                <th scope="col">Opmerking</th>
             </tr>
             </thead>
             <tbody>
@@ -123,16 +149,7 @@
         </table>
     </div>
 
-    <div class="container">
-{{--        <canvas id="chart" style="width: 100%; height: 65vh; background: #222; border: 1px solid #555652; margin-top: 10px;"></canvas>--}}
 
-        <div class="chartWrapper">
-            <div class="chartAreaWrapper">
-                <canvas id="myChart" class="mydataChart"></canvas>
-            </div>
-            <canvas id="myChartAxis" height="300" width="0"></canvas>
-        </div>
-    </div>
 
         <script>
             {{--var ctx = document.getElementById("chart").getContext('2d');--}}
@@ -157,31 +174,36 @@
             {{--    }--}}
             {{--});--}}
 
-                var ctx = document.getElementById("myChart").getContext("2d");
+            var ctx = document.getElementById("myChart").getContext("2d");
 
             var labelsData = [];
             for (i = 1; i <= <?php echo $row2 ?>; i++) {
                 // text += cars[i] + "<br>";
-                labelsData.push(i);
+
+                labelsData.push(<?php echo '"' .$data2[4]. '"'?>);
             }
 
                 let data = {
                     labels: labelsData,
                     datasets: [
                         {
-                            label: "My First dataset",
+                            label: "Emoties",
                             fillColor: "rgba(220,220,220,0.2)",
                             strokeColor: "rgba(220,220,220,1)",
                             pointColor: "rgba(220,220,220,1)",
                             pointStrokeColor: "#fff",
                             pointHighlightFill: "#fff",
                             pointHighlightStroke: "rgba(220,220,220,1)",
-                            data: [<?php echo $data1 ?>]
+                            data: [<?php echo $data1 ?>],
+
                         },
                     ]
                 };
                 // document.getElementsByClassName("mydataChart").style.width = widthData + "px";
                 $(".mydataChart").css("width", data.labels.length * 150 + "px");
+                $(".chartAreaWrapper").scrollLeft(data.labels.length * 150);
+
+
 
                 new Chart(ctx).Line(data, {
                     onAnimationComplete: function () {
@@ -193,6 +215,7 @@
                         targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
                     }
                 });
+
 
                 // if(data.labels.length > 10){
                 //     // document.getElementById("myChart").style.width = "300%";
