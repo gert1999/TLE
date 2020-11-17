@@ -177,10 +177,13 @@
             var ctx = document.getElementById("myChart").getContext("2d");
 
             var labelsData = [];
+
+            var users = <?php echo json_encode($data2); ?>;
+
             for (i = 1; i <= <?php echo $row2 ?>; i++) {
                 // text += cars[i] + "<br>";
 
-                labelsData.push(<?php echo '"' .$data2[4]. '"'?>);
+                labelsData.push(users[i-1]);
             }
 
                 let data = {
