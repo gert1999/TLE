@@ -58,7 +58,6 @@
     {
         $row3['created_at'] = date('d-m-Y');
         $data2[] = $row3['created_at'];
-
     }
 
 
@@ -143,12 +142,16 @@
                 <canvas id="myChart" class="mydataChart"></canvas>
             </div>
             <canvas id="myChartAxis" height="300" width="0"></canvas>
-            <div style="display:none">
-                <img id="source"
-                     src="{{ asset('images\emotie.png') }}"
-                     width="300" height="227">
+            <div>
+                <img src="/images/EmojiEdged128x/5emoji128x.png" style="position:absolute;height: 20px;top:0;left:6px"/>
+                <img src="/images/EmojiEdged128x/4emoji128x.png" style="position:absolute;height: 20px;top:68px;left:6px"/>
+                <img src="/images/EmojiEdged128x/3emoji128x.png" style="position:absolute;height: 20px;top:135px;left:6px"/>
+                <img src="/images/EmojiEdged128x/2emoji128x.png" style="position:absolute;height: 20px;top:200px;left:6px"/>
+                <img src="/images/EmojiEdged128x/1emoji128x.png" style="position:absolute;height: 20px;top:263px;left:6px"/>
             </div>
+
         </div>
+
     </div>
 
     <div class="container">
@@ -179,6 +182,7 @@
             </tbody>
         </table>
     </div>
+
 
 
 
@@ -229,7 +233,6 @@
                             pointHighlightFill: "#fff",
                             pointHighlightStroke: "rgba(220,220,220,1)",
                             data: [<?php echo $data1 ?>],
-
                         },
                     ]
                 };
@@ -247,7 +250,7 @@
                         //         yAxes:[{
                         //             ticks: {
                         //                 callback: function (value, index, values) {
-                        //                     return value + 1;
+                        //                     return '$' + values;
                         //
                         //                 }
                         //
@@ -255,13 +258,14 @@
                         //         }]
                         //     }
                         // },
-                    onAnimationComplete: function () {
-                        var sourceCanvas = this.chart.ctx.canvas;
-                        var copyWidth = this.scale.xScalePaddingLeft - 5;
-                        var copyHeight = this.scale.endPoint + 5;
-                        var targetCtx = document.getElementById("myChartAxis").getContext("2d");
-                        targetCtx.canvas.width = copyWidth;
-                        targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+
+                            onAnimationComplete: function () {
+                                var sourceCanvas = this.chart.ctx.canvas;
+                                var copyWidth = this.scale.xScalePaddingLeft - 5;
+                                var copyHeight = this.scale.endPoint + 5;
+                                var targetCtx = document.getElementById("myChartAxis").getContext("2d");
+                                targetCtx.canvas.width = copyWidth;
+                                targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
                     }
                 });
 
