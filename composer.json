@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
         "tymon/jwt-auth": "^1.0",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
