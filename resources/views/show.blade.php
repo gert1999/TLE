@@ -51,14 +51,19 @@
 //
 //        }
 //dd($smileys);
-    $sql2 = "SELECT `created_at` FROM `feelings` WHERE `student_id` = $id";
+    $sql2 = "SELECT `created_at` from feelings WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
     while ($row3 = mysqli_fetch_array($result2))
     {
+        $row3['created_at'] = date('d-m-Y');
         $data2[] = $row3['created_at'];
 
     }
+
+
+
+
 
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
 //    $result2 = mysqli_query($mysqli, $sql2);
