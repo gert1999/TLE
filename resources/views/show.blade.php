@@ -20,9 +20,37 @@
     }
 
     $row2 = mysqli_num_rows($result);
-
     $data1 = trim($data1,",");
 
+    $size = explode(",", $data1,100);
+    $arraysize = count($size);
+    //dd($size);
+    $smileys = [];
+    for($s=0; $s < $arraysize ; $s++)
+        {
+            if ($size[$s]== "1")
+                {
+                  $smileys[]= 1;
+                }
+            else if ($size[$s]== "2")
+            {
+                $smileys[]=  2;
+            }
+            else if ($size[$s]== "3")
+            {
+                $smileys[]=  3;
+            }
+            else if ($size[$s]== "4")
+            {
+                $smileys[]=  4;
+            }
+            else if ($size[$s]== "5")
+            {
+                $smileys[]=  5;
+            }
+
+        }
+dd($smileys);
     $sql2 = "SELECT `created_at` FROM `feelings` WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
@@ -31,7 +59,7 @@
         $data2[] = $row3['created_at'];
 
     }
-//    dd($data2)
+
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
 //    $result2 = mysqli_query($mysqli, $sql2);
 //
@@ -208,7 +236,22 @@
 
 
 
-                new Chart(ctx).Line(data, {
+                new Chart(ctx).Line(data,
+
+                    {
+                        // options:{
+                        //     scales:{
+                        //         yAxes:[{
+                        //             ticks: {
+                        //                 callback: function (value, index, values) {
+                        //                     return value + 1;
+                        //
+                        //                 }
+                        //
+                        //             }
+                        //         }]
+                        //     }
+                        // },
                     onAnimationComplete: function () {
                         var sourceCanvas = this.chart.ctx.canvas;
                         var copyWidth = this.scale.xScalePaddingLeft - 5;
