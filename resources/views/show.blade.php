@@ -150,25 +150,23 @@
         <table class="table" style="margin-top:100px;">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">score</th>
+                <th scope="col">Gevoel</th>
                 <th scope="col">Opmerking</th>
             </tr>
             </thead>
             <tbody>
             @foreach($feeling as $row)
-                    <tr>
-                        <th scope="row">{{$row->student_id}}</th>
+                    <img>
                         @if($row->score == 1)
-                            <td>☹</td>
+                            <td><img src="/images/EmojiEdged128x/1emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 2)
-                            <td>🙁</td>
+                            <td><img src="/images/EmojiEdged128x/2emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 3)
-                            <td>🙂</td>
+                            <td><img src="/images/EmojiEdged128x/3emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 4)
-                            <td>😃</td>
+                            <td><img src="/images/EmojiEdged128x/4emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 5)
-                            <td>😄</td>
+                            <td><img src="/images/EmojiEdged128x/5emoji128x.png" style="height: 25px;"/></td>
                         @endif
                         <th>{{$row->comment}}</th>
                     </tr>
@@ -262,15 +260,10 @@
                     }
                 });
 
-
                 // if(data.labels.length > 10){
                 //     // document.getElementById("myChart").style.width = "300%";
                 // }
                 // $(".chartAreaWrapper").scrollTop(100);
-
-
-
-
         </script>
     </div>
 </x-app-layout>
