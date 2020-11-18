@@ -22,35 +22,35 @@
     $row2 = mysqli_num_rows($result);
     $data1 = trim($data1,",");
 
-    $size = explode(",", $data1,100);
-    $arraysize = count($size);
-    //dd($size);
-    $smileys = [];
-    for($s=0; $s < $arraysize ; $s++)
-        {
-            if ($size[$s]== "1")
-                {
-                  $smileys[]= 1;
-                }
-            else if ($size[$s]== "2")
-            {
-                $smileys[]=  2;
-            }
-            else if ($size[$s]== "3")
-            {
-                $smileys[]=  3;
-            }
-            else if ($size[$s]== "4")
-            {
-                $smileys[]=  4;
-            }
-            else if ($size[$s]== "5")
-            {
-                $smileys[]=  5;
-            }
-
-        }
-dd($smileys);
+//    $size = explode(",", $data1,100);
+//    $arraysize = count($size);
+//    dd($size);
+//    $smileys = [];
+//    for($s=0; $s < $arraysize ; $s++)
+//        {
+//            if ($size[$s]== "1")
+//                {
+//                  $smileys[]= 1;
+//                }
+//            else if ($size[$s]== "2")
+//            {
+//                $smileys[]=  2;
+//            }
+//            else if ($size[$s]== "3")
+//            {
+//                $smileys[]=  3;
+//            }
+//            else if ($size[$s]== "4")
+//            {
+//                $smileys[]=  4;
+//            }
+//            else if ($size[$s]== "5")
+//            {
+//                $smileys[]=  5;
+//            }
+//
+//        }
+//dd($smileys);
     $sql2 = "SELECT `created_at` FROM `feelings` WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
