@@ -24,11 +24,15 @@ class counselorsController extends Controller
 //        $feeling = Feelings::find($id);
         $feeling = DB::table('feelings')
             ->where('student_id', $id)
+            ->orderBy('id', 'DESC')
             ->get();
 
         if($feeling === null){
             abort(404, "Dit pagina is helaas niet gevonden");
         }
+        $student = DB::table('students')
+            ->where('id', $id)
+            ->get();
 
 
 //        $data1 = '';
@@ -51,6 +55,6 @@ class counselorsController extends Controller
 
 
 
-        return view('show', compact('feeling', 'id'));
+        return view('show', compact('feeling', 'id', 'student'));
     }
 }

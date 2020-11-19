@@ -60,8 +60,12 @@
         $data2[] = $row3['created_at'];
     }
 
-
-
+    if($row2 == 0){
+        $data2[] = '';
+        $error = 'Op dit moment is er niets ingevuld';
+    }else{
+        $error = '';
+    }
 
 
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
@@ -129,9 +133,11 @@
 </style>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        @foreach($student as $students)
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Gevoelens {{$students->first_name}} {{$students->last_name}}
+            </h2>
+        @endforeach
     </x-slot>
 
     <div class="container" style="margin-top:100px;">
@@ -151,7 +157,7 @@
             </div>
 
         </div>
-
+<?php echo "<h1 style='font-size:30px;text-align:center;position:relative;top:40px;'>$error</h1>"; ?>
     </div>
 
     <div class="container">
