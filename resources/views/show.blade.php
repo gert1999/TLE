@@ -22,35 +22,6 @@
     $row2 = mysqli_num_rows($result);
     $data1 = trim($data1,",");
 
-//    $size = explode(",", $data1,100);
-//    $arraysize = count($size);
-//    dd($size);
-//    $smileys = [];
-//    for($s=0; $s < $arraysize ; $s++)
-//        {
-//            if ($size[$s]== "1")
-//                {
-//                  $smileys[]= 1;
-//                }
-//            else if ($size[$s]== "2")
-//            {
-//                $smileys[]=  2;
-//            }
-//            else if ($size[$s]== "3")
-//            {
-//                $smileys[]=  3;
-//            }
-//            else if ($size[$s]== "4")
-//            {
-//                $smileys[]=  4;
-//            }
-//            else if ($size[$s]== "5")
-//            {
-//                $smileys[]=  5;
-//            }
-//
-//        }
-//dd($smileys);
     $sql2 = "SELECT `created_at` from feelings WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
@@ -74,17 +45,6 @@
               $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
             }
         }
-
-
-
-
-
-//    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
-//    $result2 = mysqli_query($mysqli, $sql2);
-//
-//    $row3 = mysqli_num_rows($result2);
-//
-
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -168,7 +128,7 @@
             </div>
 
         </div>
-<?php echo "<h1 style='font-size:30px;text-align:center;position:relative;top:40px;'>$error</h1>"; ?>
+        <?php echo "<h1 style='font-size:30px;text-align:center;position:relative;top:40px;'>$error</h1>"; ?>
     </div>
 
     <div class="container">
@@ -200,32 +160,7 @@
         </table>
     </div>
 
-
-
-
         <script>
-            {{--var ctx = document.getElementById("chart").getContext('2d');--}}
-            {{--var myChart = new Chart(ctx, {--}}
-            {{--    type: 'line',--}}
-            {{--    data: {--}}
-            {{--        labels: [1,2,3,4,5,6,7,8,9,10],--}}
-            {{--        datasets:--}}
-            {{--            [{--}}
-            {{--                label: 'Emoties',--}}
-            {{--                data: [<?php echo $data1 ?>],--}}
-            {{--                backgroundColor: 'transparent',--}}
-            {{--                borderColor:'rgba(255,99,132)',--}}
-            {{--                borderWidth: 5,--}}
-            {{--            }]--}}
-            {{--    },--}}
-
-            {{--    options: {--}}
-            {{--        scales: {scales:{yAxes: [{beginAtZero: false}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},--}}
-            {{--        tooltips:{mode: 'index'},--}}
-            {{--        legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}--}}
-            {{--    }--}}
-            {{--});--}}
-
             var ctx = document.getElementById("myChart").getContext("2d");
 
             var labelsData = [];
@@ -257,10 +192,7 @@
                 $(".mydataChart").css("width", data.labels.length * 150 + "px");
                 $(".chartAreaWrapper").scrollLeft(data.labels.length * 150);
 
-
-
                 new Chart(ctx).Line(data,
-
                     {
                         scaleOverride : true,
                         scaleSteps : 4,
@@ -275,13 +207,7 @@
                                 targetCtx.canvas.width = copyWidth;
                                 targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
                     },
-
                 });
-
-                // if(data.labels.length > 10){
-                //     // document.getElementById("myChart").style.width = "300%";
-                // }
-                // $(".chartAreaWrapper").scrollTop(100);
         </script>
     </div>
 </x-app-layout>
