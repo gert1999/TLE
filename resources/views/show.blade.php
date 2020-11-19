@@ -56,9 +56,18 @@
 
     while ($row3 = mysqli_fetch_array($result2))
     {
-        $row3['created_at'] = date('d-m-Y');
+        $row3['created_at'];
         $data2[] = $row3['created_at'];
+
     }
+$time = [];
+    for ($t=0; $t < count($data2); $t++)
+        {
+          $crazyTime =  explode("-", $data2[$t]);
+
+          $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
+        }
+
 
     if($row2 == 0){
         $data2[] = '';
@@ -219,7 +228,7 @@
 
             var labelsData = [];
 
-            var users = <?php echo json_encode($data2); ?>;
+            var users = <?php echo json_encode($time); ?>;
 
             for (i = 1; i <= <?php echo $row2 ?>; i++) {
                 // text += cars[i] + "<br>";
@@ -251,19 +260,16 @@
                 new Chart(ctx).Line(data,
 
                     {
-                        // options:{
-                        //     scales:{
-                        //         yAxes:[{
-                        //             ticks: {
-                        //                 callback: function (value, index, values) {
-                        //                     return '$' + values;
-                        //
-                        //                 }
-                        //
-                        //             }
-                        //         }]
-                        //     }
-                        // },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        suggestedMin: 1,
+                                        suggestedMax: 5
+                                    }
+                                }]
+                            }
+                        },
 
                             onAnimationComplete: function () {
                                 var sourceCanvas = this.chart.ctx.canvas;
@@ -272,7 +278,8 @@
                                 var targetCtx = document.getElementById("myChartAxis").getContext("2d");
                                 targetCtx.canvas.width = copyWidth;
                                 targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
-                    }
+                    },
+
                 });
 
                 // if(data.labels.length > 10){
