@@ -22,43 +22,47 @@
     $row2 = mysqli_num_rows($result);
     $data1 = trim($data1,",");
 
-    $size = explode(",", $data1,100);
-    $arraysize = count($size);
-    //dd($size);
-    $smileys = [];
-    for($s=0; $s < $arraysize ; $s++)
-        {
-            if ($size[$s]== "1")
-                {
-                  $smileys[]= 1;
-                }
-            else if ($size[$s]== "2")
-            {
-                $smileys[]=  2;
-            }
-            else if ($size[$s]== "3")
-            {
-                $smileys[]=  3;
-            }
-            else if ($size[$s]== "4")
-            {
-                $smileys[]=  4;
-            }
-            else if ($size[$s]== "5")
-            {
-                $smileys[]=  5;
-            }
-
-        }
-dd($smileys);
-    $sql2 = "SELECT `created_at` FROM `feelings` WHERE `student_id` = $id";
+//    $size = explode(",", $data1,100);
+//    $arraysize = count($size);
+//    dd($size);
+//    $smileys = [];
+//    for($s=0; $s < $arraysize ; $s++)
+//        {
+//            if ($size[$s]== "1")
+//                {
+//                  $smileys[]= 1;
+//                }
+//            else if ($size[$s]== "2")
+//            {
+//                $smileys[]=  2;
+//            }
+//            else if ($size[$s]== "3")
+//            {
+//                $smileys[]=  3;
+//            }
+//            else if ($size[$s]== "4")
+//            {
+//                $smileys[]=  4;
+//            }
+//            else if ($size[$s]== "5")
+//            {
+//                $smileys[]=  5;
+//            }
+//
+//        }
+//dd($smileys);
+    $sql2 = "SELECT `created_at` from feelings WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
     while ($row3 = mysqli_fetch_array($result2))
     {
+        $row3['created_at'] = date('d-m-Y');
         $data2[] = $row3['created_at'];
-
     }
+
+
+
+
 
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
 //    $result2 = mysqli_query($mysqli, $sql2);
@@ -138,37 +142,39 @@ dd($smileys);
                 <canvas id="myChart" class="mydataChart"></canvas>
             </div>
             <canvas id="myChartAxis" height="300" width="0"></canvas>
-            <div style="display:none">
-                <img id="source"
-                     src="{{ asset('images\emotie.png') }}"
-                     width="300" height="227">
+            <div>
+                <img src="/images/EmojiEdged128x/5emoji128x.png" style="position:absolute;height: 20px;top:0;left:6px"/>
+                <img src="/images/EmojiEdged128x/4emoji128x.png" style="position:absolute;height: 20px;top:68px;left:6px"/>
+                <img src="/images/EmojiEdged128x/3emoji128x.png" style="position:absolute;height: 20px;top:135px;left:6px"/>
+                <img src="/images/EmojiEdged128x/2emoji128x.png" style="position:absolute;height: 20px;top:200px;left:6px"/>
+                <img src="/images/EmojiEdged128x/1emoji128x.png" style="position:absolute;height: 20px;top:263px;left:6px"/>
             </div>
+
         </div>
+
     </div>
 
     <div class="container">
         <table class="table" style="margin-top:100px;">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">score</th>
+                <th scope="col">Gevoel</th>
                 <th scope="col">Opmerking</th>
             </tr>
             </thead>
             <tbody>
             @foreach($feeling as $row)
-                    <tr>
-                        <th scope="row">{{$row->student_id}}</th>
+                    <img>
                         @if($row->score == 1)
-                            <td>☹</td>
+                            <td><img src="/images/EmojiEdged128x/1emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 2)
-                            <td>🙁</td>
+                            <td><img src="/images/EmojiEdged128x/2emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 3)
-                            <td>🙂</td>
+                            <td><img src="/images/EmojiEdged128x/3emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 4)
-                            <td>😃</td>
+                            <td><img src="/images/EmojiEdged128x/4emoji128x.png" style="height: 25px;"/></td>
                         @elseif($row->score == 5)
-                            <td>😄</td>
+                            <td><img src="/images/EmojiEdged128x/5emoji128x.png" style="height: 25px;"/></td>
                         @endif
                         <th>{{$row->comment}}</th>
                     </tr>
@@ -176,6 +182,7 @@ dd($smileys);
             </tbody>
         </table>
     </div>
+
 
 
 
@@ -226,7 +233,6 @@ dd($smileys);
                             pointHighlightFill: "#fff",
                             pointHighlightStroke: "rgba(220,220,220,1)",
                             data: [<?php echo $data1 ?>],
-
                         },
                     ]
                 };
@@ -244,7 +250,7 @@ dd($smileys);
                         //         yAxes:[{
                         //             ticks: {
                         //                 callback: function (value, index, values) {
-                        //                     return value + 1;
+                        //                     return '$' + values;
                         //
                         //                 }
                         //
@@ -252,25 +258,21 @@ dd($smileys);
                         //         }]
                         //     }
                         // },
-                    onAnimationComplete: function () {
-                        var sourceCanvas = this.chart.ctx.canvas;
-                        var copyWidth = this.scale.xScalePaddingLeft - 5;
-                        var copyHeight = this.scale.endPoint + 5;
-                        var targetCtx = document.getElementById("myChartAxis").getContext("2d");
-                        targetCtx.canvas.width = copyWidth;
-                        targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+
+                            onAnimationComplete: function () {
+                                var sourceCanvas = this.chart.ctx.canvas;
+                                var copyWidth = this.scale.xScalePaddingLeft - 5;
+                                var copyHeight = this.scale.endPoint + 5;
+                                var targetCtx = document.getElementById("myChartAxis").getContext("2d");
+                                targetCtx.canvas.width = copyWidth;
+                                targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
                     }
                 });
-
 
                 // if(data.labels.length > 10){
                 //     // document.getElementById("myChart").style.width = "300%";
                 // }
                 // $(".chartAreaWrapper").scrollTop(100);
-
-
-
-
         </script>
     </div>
 </x-app-layout>

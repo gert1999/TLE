@@ -1,2 +1,0 @@
-<?php
-//Test van Bram
