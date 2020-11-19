@@ -60,21 +60,23 @@
         $data2[] = $row3['created_at'];
 
     }
-$time = [];
-    for ($t=0; $t < count($data2); $t++)
-        {
-          $crazyTime =  explode("-", $data2[$t]);
-
-          $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
-        }
-
-
     if($row2 == 0){
         $data2[] = '';
         $error = 'Op dit moment is er niets ingevuld';
+        $time = [];
     }else{
         $error = '';
-    }
+        $time = [];
+        for ($t=0; $t < count($data2); $t++)
+            {
+              $crazyTime =  explode("-", $data2[$t]);
+
+              $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
+            }
+        }
+
+
+
 
 
 //    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
