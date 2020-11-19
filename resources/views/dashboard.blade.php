@@ -22,6 +22,10 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+
+{{--    Offset seen from top--}}
+    <div class="container" style="margin-top:100px;">
+
     <div class="container">
         <table class="table">
             <thead>
