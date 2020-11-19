@@ -260,18 +260,12 @@ $time = [];
                 new Chart(ctx).Line(data,
 
                     {
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        suggestedMin: 1,
-                                        suggestedMax: 5
-                                    }
-                                }]
-                            }
-                        },
+                        scaleOverride : true,
+                        scaleSteps : 4,
+                        scaleStepWidth : 1,
+                        scaleStartValue : 1,
 
-                            onAnimationComplete: function () {
+                        onAnimationComplete: function () {
                                 var sourceCanvas = this.chart.ctx.canvas;
                                 var copyWidth = this.scale.xScalePaddingLeft - 5;
                                 var copyHeight = this.scale.endPoint + 5;
