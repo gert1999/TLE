@@ -22,54 +22,29 @@
     $row2 = mysqli_num_rows($result);
     $data1 = trim($data1,",");
 
-//    $size = explode(",", $data1,100);
-//    $arraysize = count($size);
-//    dd($size);
-//    $smileys = [];
-//    for($s=0; $s < $arraysize ; $s++)
-//        {
-//            if ($size[$s]== "1")
-//                {
-//                  $smileys[]= 1;
-//                }
-//            else if ($size[$s]== "2")
-//            {
-//                $smileys[]=  2;
-//            }
-//            else if ($size[$s]== "3")
-//            {
-//                $smileys[]=  3;
-//            }
-//            else if ($size[$s]== "4")
-//            {
-//                $smileys[]=  4;
-//            }
-//            else if ($size[$s]== "5")
-//            {
-//                $smileys[]=  5;
-//            }
-//
-//        }
-//dd($smileys);
     $sql2 = "SELECT `created_at` from feelings WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
     while ($row3 = mysqli_fetch_array($result2))
     {
-        $row3['created_at'] = date('d-m-Y');
+        $row3['created_at'];
         $data2[] = $row3['created_at'];
+
     }
+    if($row2 == 0){
+        $data2[] = '';
+        $error = 'Op dit moment is er niets ingevuld';
+        $time = [];
+    }else{
+        $error = '';
+        $time = [];
+        for ($t=0; $t < count($data2); $t++)
+            {
+              $crazyTime =  explode("-", $data2[$t]);
 
-
-
-
-
-//    $sql2 = "SELECT COUNT(*) FROM feelings WHERE `student_id` = $id";
-//    $result2 = mysqli_query($mysqli, $sql2);
-//
-//    $row3 = mysqli_num_rows($result2);
-//
-
+              $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
+            }
+        }
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -129,9 +104,11 @@
 </style>
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        @foreach($student as $students)
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Gevoelens {{$students->first_name}} {{$students->last_name}}
+            </h2>
+        @endforeach
     </x-slot>
 
     <div class="container" style="margin-top:100px;">
@@ -151,7 +128,7 @@
             </div>
 
         </div>
-
+        <?php echo "<h1 style='font-size:30px;text-align:center;position:relative;top:40px;'>$error</h1>"; ?>
     </div>
 
     <div class="container">
@@ -183,37 +160,12 @@
         </table>
     </div>
 
-
-
-
         <script>
-            {{--var ctx = document.getElementById("chart").getContext('2d');--}}
-            {{--var myChart = new Chart(ctx, {--}}
-            {{--    type: 'line',--}}
-            {{--    data: {--}}
-            {{--        labels: [1,2,3,4,5,6,7,8,9,10],--}}
-            {{--        datasets:--}}
-            {{--            [{--}}
-            {{--                label: 'Emoties',--}}
-            {{--                data: [<?php echo $data1 ?>],--}}
-            {{--                backgroundColor: 'transparent',--}}
-            {{--                borderColor:'rgba(255,99,132)',--}}
-            {{--                borderWidth: 5,--}}
-            {{--            }]--}}
-            {{--    },--}}
-
-            {{--    options: {--}}
-            {{--        scales: {scales:{yAxes: [{beginAtZero: false}], xAxes: [{autoskip: true, maxTicketsLimit: 20}]}},--}}
-            {{--        tooltips:{mode: 'index'},--}}
-            {{--        legend:{display: true, position: 'top', labels: {fontColor: 'rgb(255,255,255)', fontSize: 16}}--}}
-            {{--    }--}}
-            {{--});--}}
-
             var ctx = document.getElementById("myChart").getContext("2d");
 
             var labelsData = [];
 
-            var users = <?php echo json_encode($data2); ?>;
+            var users = <?php echo json_encode($time); ?>;
 
             for (i = 1; i <= <?php echo $row2 ?>; i++) {
                 // text += cars[i] + "<br>";
@@ -240,39 +192,22 @@
                 $(".mydataChart").css("width", data.labels.length * 150 + "px");
                 $(".chartAreaWrapper").scrollLeft(data.labels.length * 150);
 
-
-
                 new Chart(ctx).Line(data,
-
                     {
-                        // options:{
-                        //     scales:{
-                        //         yAxes:[{
-                        //             ticks: {
-                        //                 callback: function (value, index, values) {
-                        //                     return '$' + values;
-                        //
-                        //                 }
-                        //
-                        //             }
-                        //         }]
-                        //     }
-                        // },
+                        scaleOverride : true,
+                        scaleSteps : 4,
+                        scaleStepWidth : 1,
+                        scaleStartValue : 1,
 
-                            onAnimationComplete: function () {
+                        onAnimationComplete: function () {
                                 var sourceCanvas = this.chart.ctx.canvas;
                                 var copyWidth = this.scale.xScalePaddingLeft - 5;
                                 var copyHeight = this.scale.endPoint + 5;
                                 var targetCtx = document.getElementById("myChartAxis").getContext("2d");
                                 targetCtx.canvas.width = copyWidth;
                                 targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
-                    }
+                    },
                 });
-
-                // if(data.labels.length > 10){
-                //     // document.getElementById("myChart").style.width = "300%";
-                // }
-                // $(".chartAreaWrapper").scrollTop(100);
         </script>
     </div>
 </x-app-layout>
