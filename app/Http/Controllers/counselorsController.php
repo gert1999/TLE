@@ -6,6 +6,7 @@ use App\Feelings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class counselorsController extends Controller
 {
@@ -16,9 +17,10 @@ class counselorsController extends Controller
             ->where('students.counselor_id', auth()->user()->id)
             ->select('students.*')
             ->get();
+        return view('dashboard', compact('students'));
 
-        return view('dashboard', compact('students', $students));
     }
+
     public function show($id){
 
 //        $feeling = Feelings::find($id);

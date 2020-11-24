@@ -137,6 +137,7 @@
             <tr>
                 <th scope="col">Gevoel</th>
                 <th scope="col">Opmerking</th>
+                <th scope="col">Datum</th>
             </tr>
             </thead>
             <tbody>
@@ -154,6 +155,7 @@
                             <td><img src="/images/EmojiEdged128x/5emoji128x.png" style="height: 25px;"/></td>
                         @endif
                         <th>{{$row->comment}}</th>
+                        <th>{{$row->created_at}}</th>
                     </tr>
             @endforeach
             </tbody>
@@ -198,6 +200,7 @@
                         scaleSteps : 4,
                         scaleStepWidth : 1,
                         scaleStartValue : 1,
+                        events: ['click'],
 
                         onAnimationComplete: function () {
                                 var sourceCanvas = this.chart.ctx.canvas;
