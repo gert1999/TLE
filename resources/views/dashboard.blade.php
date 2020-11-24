@@ -48,7 +48,9 @@
                         <button class="btn"><i class="fa fa-edit"></i></button>
                         <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-times"></i></button>
+                        <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                     </td>
+                    <td></td>
                 </tr>
             @endforeach
             </tbody>

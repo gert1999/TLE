@@ -34,27 +34,14 @@ class counselorsController extends Controller
             ->where('id', $id)
             ->get();
 
-
-//        $data1 = '';
-
-//        $sql = DB::table('feelings')
-//            ->where('student_id', 2)
-//            ->get();
-//
-////        dd($sql);
-//        foreach($sql as $sql1){
-//
-//            $data1 = $sql1->score;
-//
-////            $data1 = $sql1->score.'",';
-////            dd($data1);
-//
-//        }
-
-//        $data1 = trim($data1,",");
-
-
-
         return view('show', compact('feeling', 'id', 'student'));
+    }
+    public function info($id){
+
+        $students = DB::table('students')
+            ->where('id', $id)
+            ->get();
+
+        return view('info', compact(  'students'));
     }
 }
