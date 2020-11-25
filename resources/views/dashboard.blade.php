@@ -56,8 +56,9 @@
                         <button class="btn"><i class="fa fa-edit"></i></button>
                         <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-times"></i></button>
+                        <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                     </td>
-                    @if ($feeling == 3)
+                    @if ($feeling[$row->id] >= 3)
                     <td>
                         danger
                     </td>

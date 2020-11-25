@@ -22,23 +22,37 @@ class counselorsController extends Controller
             ->where('students.counselor_id', auth()->user()->id)
             ->first();
 
-
+        $studentNumber = DB::table('students')
+            ->get();
 
         $feelings = DB::table('feelings')
             ->where('student_id', $studentID->id)
             ->get();
 $feelingArray = [];
-
-        $feeling = 0;
+$feelingID = [];
+foreach ($studentNumber as $stuff)
+{
+    $studentCount = $stuff->id;
+}
+$feeling =[];
+for ($c = 0;$c < $studentCount;$c++)
+{
+    $feeling[] = 0;
+}
 foreach ($feelings as $data) {
     $inbetween = $data->score;
-
+    $IDbetween = $data->student_id;
     $feelingArray[] = $inbetween;
+    $feelingID[] = $IDbetween;
 }
         if(count($feelingArray)>=3) {
             for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
                 if ($feelingArray[$i] < 3) {
-                    $feeling++;
+                    $feeling[$feelingID[$i]] = $feeling[$feelingID[$i]] + 1;
+                }
+                else
+                    {
+                        $feeling[$feelingID[$i]] = 0;
                 }
 
             }
