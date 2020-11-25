@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ public_path('css/font-awesome/css/font-awesome.min.css') }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,11 +36,18 @@
                 <th scope="col">E-mailadres</th>
                 <th scope="col">Aangemaakt op</th>
                 <th scope="col">Acties</th>
+                <th scope="col">Score</th>
+
             </tr>
             </thead>
             <tbody>
+
+
             @foreach($students as $row)
+
                 <tr>
+
+
                     <th scope="row">{{$row->id}}</th>
                     <td>{{$row->first_name}} {{$row->last_name}} </td>
                     <td>{{$row->email}}</td>
@@ -50,8 +58,16 @@
                         <button class="btn"><i class="fa fa-times"></i></button>
                         <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                     </td>
-                    <td></td>
+                    @if ($feeling[$row->id] >= 3)
+                    <td>
+                        danger
+                    </td>
+                        @else
+                        <td>all good</td>
+
+                    @endif
                 </tr>
+
             @endforeach
             </tbody>
         </table>
