@@ -18,10 +18,17 @@ class AppointmentsComposer
                 ->join('students', 'appointments.student_id', '=', 'students.id')
                 ->where('appointments.counselor_id', Auth::user()->id)
                 ->get();
+
+
+            $appointments2 = DB::table('appointments')
+                ->join('students', 'appointments.student_id', '=', 'students.id')
+                ->where('appointments.counselor_id', Auth::user()->id)
+                ->count();
             //        $appointments = Carbon::createFromFormat('Y-m-d H:i:s', $appointments)->format('d/m/Y');
 
             $avatar = //AVATAR HERE
             $view->with('appointments', $appointments);
+            $view->with('appointments2', $appointments2);
         }
     }
 }

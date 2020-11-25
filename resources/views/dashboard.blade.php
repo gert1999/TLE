@@ -36,7 +36,7 @@
                 <th scope="col">E-mailadres</th>
                 <th scope="col">Aangemaakt op</th>
                 <th scope="col">Acties</th>
-                <th scope="col">Score</th>
+                <th scope="col">Status</th>
 
             </tr>
             </thead>
@@ -53,18 +53,16 @@
                     <td>{{$row->email}}</td>
                     <td>{{$row->created_at}}</td>
                     <td>
-                        <button class="btn"><i class="fa fa-edit"></i></button>
-                        <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
-                        <button class="btn"><i class="fa fa-times"></i></button>
                         <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
+                        <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
+                        <button class="btn"><i class="fa fa-edit"></i></button>
+                        <button class="btn"><i class="fa fa-times"></i></button>
+
                     </td>
                     @if ($feeling[$row->id] >= 3)
-                    <td>
-                        danger
-                    </td>
-                        @else
-                        <td>all good</td>
-
+                        <td>⚠️</td>
+                    @else
+                        <td>✔️</td>
                     @endif
                 </tr>
 

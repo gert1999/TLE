@@ -1,4 +1,16 @@
 <link href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet">
+<style>
+    .badge {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        padding: 2.5px 5px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+        font-size:8px;
+    }
+</style>
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,7 +122,14 @@
                             </button>
                         @else
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                <div><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                                <div>
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    @if($appointments2 == 0)
+
+                                    @else
+                                        <span class="badge">{{$appointments2}}</span>
+                                    @endif
+                                </div>
 
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
