@@ -6,7 +6,6 @@ use App\Feelings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
 
 class counselorsController extends Controller
 {
@@ -17,10 +16,38 @@ class counselorsController extends Controller
             ->where('students.counselor_id', auth()->user()->id)
             ->select('students.*')
             ->get();
-        return view('dashboard', compact('students'));
+
+        $studentID = DB::table('counselors')
+            ->join('students', 'counselors.id', '=', 'students.counselor_id')
+            ->where('students.counselor_id', auth()->user()->id)
+            ->first();
+
+
+
+        $feelings = DB::table('feelings')
+            ->where('student_id', $studentID->id)
+            ->get();
+$feelingArray = [];
+
+        $feeling = 0;
+foreach ($feelings as $data) {
+    $inbetween = $data->score;
+
+    $feelingArray[] = $inbetween;
+}
+        if(count($feelingArray)>=3) {
+            for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
+                if ($feelingArray[$i] < 3) {
+                    $feeling++;
+                }
+
+            }
+        }
+
+
+        return view('dashboard', compact('students', 'feeling'));
 
     }
-
     public function show($id){
 
 //        $feeling = Feelings::find($id);
