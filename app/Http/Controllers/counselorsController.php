@@ -28,6 +28,8 @@ class counselorsController extends Controller
         $feelings = DB::table('feelings')
             ->where('student_id', $studentID->id)
             ->get();
+
+
 $feelingArray = [];
 $feelingID = [];
 foreach ($studentNumber as $stuff)
