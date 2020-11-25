@@ -46,3 +46,6 @@ a {
 button:hover, a:hover {
     opacity: 0.7;
 }
+.rowcard img{
+    padding-top: 15px;
+}
