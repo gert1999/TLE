@@ -18,8 +18,24 @@
                 <div class="row rowcard">
                     <div class="col-4">
                     <div class="card">
-                        <div class="col-10">
-                        <img src="https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-1-avatar-2754574_120513.png" alt="John" style="width:100%">
+                        <div class="col-8">
+                            @if($row->avatar == 'monster-1')
+                                <img src="/images/avatar/1 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-2')
+                                <img src="/images/avatar/2 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-3')
+                                <img src="/images/avatar/3 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-4')
+                                <img src="/images/avatar/4 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-5')
+                                <img src="/images/avatar/5 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-6')
+                                <img src="/images/avatar/6 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-7')
+                                <img src="/images/avatar/7 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == 'monster-8')
+                                <img src="/images/avatar/8 Avatar.png" style="width:100%">
+                            @endif
                         </div>
                     </div>
                 </div>
