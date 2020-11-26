@@ -41,8 +41,9 @@
         for ($t=0; $t < count($data2); $t++)
             {
               $crazyTime =  explode("-", $data2[$t]);
-
+                if (count($crazyTime) == 3){
               $time[] = "$crazyTime[2]-$crazyTime[1]-$crazyTime[0]";
+              }
             }
         }
 ?>

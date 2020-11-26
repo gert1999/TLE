@@ -28,23 +28,25 @@ class counselorsController extends Controller
         $feelings = DB::table('feelings')
             ->where('student_id', $studentID->id)
             ->get();
-        $feelingArray = [];
-        $feelingID = [];
-        foreach ($studentNumber as $stuff)
-        {
-            $studentCount = $stuff->id;
-        }
-        $feeling =[];
-        for ($c = 0;$c < $studentCount;$c++)
-        {
-            $feeling[] = 0;
-        }
-        foreach ($feelings as $data) {
-            $inbetween = $data->score;
-            $IDbetween = $data->student_id;
-            $feelingArray[] = $inbetween;
-            $feelingID[] = $IDbetween;
-        }
+
+
+$feelingArray = [];
+$feelingID = [];
+foreach ($studentNumber as $stuff)
+{
+    $studentCount = $stuff->id;
+}
+$feeling =[];
+for ($c = 0;$c < $studentCount;$c++)
+{
+    $feeling[] = 0;
+}
+foreach ($feelings as $data) {
+    $inbetween = $data->score;
+    $IDbetween = $data->student_id;
+    $feelingArray[] = $inbetween;
+    $feelingID[] = $IDbetween;
+}
         if(count($feelingArray)>=3) {
             for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
                 if ($feelingArray[$i] < 3) {
