@@ -8,7 +8,62 @@
     <!DOCTYPE html>
 <html>
 <head>
-    <title>Jquery Fullcalandar Integration with PHP and Mysql</title>
+    <style>
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            height:430px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom:10px;
+            opacity: 0.8;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -25,27 +80,29 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events: '{{asset('php/load.php')}}',
+                events: '{{route('load_calendar')}}',
                 selectable:true,
                 selectHelper:true,
                 select: function(start, end, allDay)
                 {
-                    var title = prompt("Enter Event Title");
-                    if(title)
-                    {
-                        var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-                        var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
-                        $.ajax({
-                            url:"insert.php",
-                            type:"POST",
-                            data:{title:title, start:start, end:end},
-                            success:function()
-                            {
-                                calendar.fullCalendar('refetchEvents');
-                                alert("Added Successfully");
-                            }
-                        })
-                    }
+                    document.getElementById("myForm").style.display = "block";
+                    document.getElementById("email_insert").value = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                    // var title = prompt("Enter Event Title");
+                    {{--if(title)--}}
+                    {{--{--}}
+                    //     console.log($.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss"));
+                        // var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+                    {{--    $.ajax({--}}
+                    {{--        url:"{{asset('php/insert.php')}}",--}}
+                    {{--        type:"POST",--}}
+                    {{--        data:{title:title, start:start, end:end},--}}
+                    {{--        success:function()--}}
+                    {{--        {--}}
+                    {{--            calendar.fullCalendar('refetchEvents');--}}
+                    {{--            alert("Added Successfully");--}}
+                    {{--        }--}}
+                    {{--    })--}}
+                    {{--}--}}
                 },
                 editable:true,
                 eventResize:function(event)
@@ -55,7 +112,7 @@
                     var title = event.title;
                     var id = event.id;
                     $.ajax({
-                        url:"update.php",
+                        url:"{{asset('php/update.php')}}",
                         type:"POST",
                         data:{title:title, start:start, end:end, id:id},
                         success:function(){
@@ -72,7 +129,7 @@
                     var title = event.title;
                     var id = event.id;
                     $.ajax({
-                        url:"update.php",
+                        url:"{{asset('php/update.php')}}",
                         type:"POST",
                         data:{title:title, start:start, end:end, id:id},
                         success:function()
@@ -116,6 +173,37 @@
         <div class="container">
             <div id="calendar" style="margin-top:80px;"></div>
         </div>
+        <div class="form-popup" id="myForm">
+            <form action="{{route('insert_calendar')}}" method="post" class="form-container">
+                @csrf
+                <h1>Afspraak maken</h1>
+            <div class="form-group">
+                <label for="psw"><b>Student</b></label>
+                <input type="text" placeholder="Enter student" name="psw" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><b>Datum</b></label>
+                <input type="date" id="email_insert" placeholder="Enter Email" name="datum" value="" required><br />
+            </div>
+            <div class="form-group">
+                <label for="email"><b>Start tijd</b></label>
+                <input type="time" placeholder="Enter Email" name="start_time" value="" required step="900"><br />
+            </div>
+            <div class="form-group">
+                <label for="email"><b>Eind tijd</b></label>
+                <input type="time" placeholder="Enter Email" name="end_time" value="" required step="900"><br />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Login</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </div>
+            </form>
+        </div>
     </x-app-layout>
 </body>
+<script>
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
 </html>

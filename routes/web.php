@@ -27,4 +27,8 @@ Route::get('/info/{student_id}', [counselorsController::class, 'info'])->name('i
 
 Route::get('/dashboard/calendar', [calendarController::class, 'index'])->name('calendar');
 
+Route::get('/dashboard/load', [calendarController::class, 'load'])->name('load_calendar');
+
+Route::post('/dashboard/insert', [calendarController::class, 'insert'])->name('insert_calendar');
+
 

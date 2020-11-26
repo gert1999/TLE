@@ -6,7 +6,7 @@ $connect = new PDO('mysql:host=boostworks.online;dbname=boostworksonline_ced', '
 
 $data = array();
 
-$query = "SELECT * FROM appointments ORDER BY id";
+$query = "SELECT * FROM appointments WHERE counselor_id= 2 ORDER BY id ";
 
 $statement = $connect->prepare($query);
 

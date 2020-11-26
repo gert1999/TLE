@@ -26,9 +26,11 @@ class AppointmentsComposer
                 ->count();
             //        $appointments = Carbon::createFromFormat('Y-m-d H:i:s', $appointments)->format('d/m/Y');
 
+            $counselors = Auth::user()->id;
             $avatar = //AVATAR HERE
             $view->with('appointments', $appointments);
             $view->with('appointments2', $appointments2);
+            $view->with('counselors', $counselors);
         }
     }
 }
