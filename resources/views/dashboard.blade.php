@@ -60,9 +60,9 @@
 
                     </td>
                     @if ($feeling[$row->id] >= 3)
-                        <td>⚠️</td>
+                        <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
                     @else
-                        <td>✔️</td>
+                        <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
                     @endif
                 </tr>
 
@@ -70,4 +70,10 @@
             </tbody>
         </table>
     </div>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+
 </x-app-layout>
