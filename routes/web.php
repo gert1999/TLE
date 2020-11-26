@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\calendarController;
 use App\Http\Controllers\counselorsController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [counselorsCo
 Route::get('/user', [counselorsController::class, 'index']);
 Route::get('/show/{student_id}', [counselorsController::class, 'show'])->name('show');
 Route::get('/info/{student_id}', [counselorsController::class, 'info'])->name('info');
+
+Route::get('/dashboard/calendar', [calendarController::class, 'index'])->name('calendar');
+
+
