@@ -227,11 +227,16 @@
                     }
                 })
             }
+            if(query === '') {
+                $('#countryList').fadeOut();
+            }
         })
         $(document).on('click', 'li', function(){
             $('#country_name').val($(this).text());
             $('#countryList').fadeOut();
         })
+
+
     });
 
 </script>
