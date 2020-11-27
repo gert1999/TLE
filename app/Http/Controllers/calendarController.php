@@ -61,7 +61,7 @@ class calendarController extends Controller
             $query = $request->get('query');
 
             $data = DB::table('students')
-                    ->where('first_name', 'LIKE', $query)
+                    ->where('first_name', 'LIKE', "%{$query}%")
                     ->get();
 
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
