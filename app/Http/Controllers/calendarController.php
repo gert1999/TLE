@@ -62,12 +62,13 @@ class calendarController extends Controller
 
             $data = DB::table('students')
                     ->where('first_name', 'LIKE', "%{$query}%")
+                    ->orWhere('last_name', 'LIKE', "%{$query}%")
                     ->get();
 
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            $output = '<ul class="dropdown-menu" style="display:block;position: absolute;margin-top:-313px;width:94%;margin-left:10px;padding-left:10px;">';
 
             foreach($data as $row){
-                $output .= '<a href="#"><li>' .$row->first_name. ' ' .$row->last_name. '</li></a><input value="' .$row->id. '" name="student_id" hidden>';
+                $output .= '<li style="cursor:pointer;">' .$row->first_name. ' ' .$row->last_name. '</li>';
             }
             $output .= '</ul>';
             echo $output;

@@ -181,7 +181,7 @@
                 <h1>Afspraak maken</h1>
             <div class="form-group">
                 <label for="psw"><b>Student</b></label>
-                <input type="text" id="country_name" placeholder="Enter student" name="student" required>
+                <input type="text" id="country_name" placeholder="Enter student" name="student" required autocomplete="off">
                 <div id="countryList"></div>
             </div>
                 {{csrf_field()}}
