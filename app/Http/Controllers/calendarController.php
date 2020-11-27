@@ -44,9 +44,16 @@ class calendarController extends Controller
         $datum_tijd_start = $datum. ' ' .$start_time;
         $datum_tijd_end = $datum. ' ' .$end_time;
 
-        DB::table('appointments')->insert([
-            ['student_id' => 2, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
-        ]);
+
+        $student_id = DB::table('students')
+                        ->where('first_name', $request->input('student'))
+                        ->get();
+
+        foreach($student_id as $row) {
+            DB::table('appointments')->insert([
+                ['student_id' => $row->id, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
+            ]);
+        }
     }
 
     function fetch(Request $request){
@@ -60,7 +67,7 @@ class calendarController extends Controller
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
 
             foreach($data as $row){
-                $output .= '<a href="#"><li>' .$row->first_name. ' ' .$row->last_name. '</li></a><input value="' .$row->id. '" name="student_id">';
+                $output .= '<a href="#"><li>' .$row->first_name. ' ' .$row->last_name. '</li></a><input value="' .$row->id. '" name="student_id" hidden>';
             }
             $output .= '</ul>';
             echo $output;
