@@ -45,7 +45,25 @@ class calendarController extends Controller
         $datum_tijd_end = $datum. ' ' .$end_time;
 
         DB::table('appointments')->insert([
-            ['student_id' => 2, 'counselor_id' => auth()->user()->id, 'appointment_date' => '', 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
+            ['student_id' => 2, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
         ]);
+    }
+
+    function fetch(Request $request){
+        if($request->get('query')){
+            $query = $request->get('query');
+
+            $data = DB::table('students')
+                    ->where('first_name', 'LIKE', $query)
+                    ->get();
+
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+
+            foreach($data as $row){
+                $output .= '<a href="#"><li>' .$row->first_name. ' ' .$row->last_name. '</li></a><input value="' .$row->id. '" name="student_id">';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 }

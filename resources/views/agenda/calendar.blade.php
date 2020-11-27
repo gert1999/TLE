@@ -87,6 +87,8 @@
                 {
                     document.getElementById("myForm").style.display = "block";
                     document.getElementById("email_insert").value = $.fullCalendar.formatDate(start, "Y-MM-DD");
+                    document.getElementById("time_start_insert").value = $.fullCalendar.formatDate(start, "HH:mm:ss");
+                    document.getElementById("time_end_insert").value = $.fullCalendar.formatDate(end, "HH:mm:ss");
                     // var title = prompt("Enter Event Title");
                     {{--if(title)--}}
                     {{--{--}}
@@ -167,7 +169,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('agenda afspraken') }}
+                {{ __('Agenda afspraken') }}
             </h2>
         </x-slot>
         <div class="container">
@@ -179,22 +181,24 @@
                 <h1>Afspraak maken</h1>
             <div class="form-group">
                 <label for="psw"><b>Student</b></label>
-                <input type="text" placeholder="Enter student" name="psw" required>
+                <input type="text" id="country_name" placeholder="Enter student" name="student" required>
+                <div id="countryList"></div>
             </div>
+                {{csrf_field()}}
             <div class="form-group">
                 <label for="email"><b>Datum</b></label>
                 <input type="date" id="email_insert" placeholder="Enter Email" name="datum" value="" required><br />
             </div>
             <div class="form-group">
                 <label for="email"><b>Start tijd</b></label>
-                <input type="time" placeholder="Enter Email" name="start_time" value="" required step="900"><br />
+                <input type="time" id="time_start_insert" placeholder="Enter Email" name="start_time" value="" required step="900"><br />
             </div>
             <div class="form-group">
                 <label for="email"><b>Eind tijd</b></label>
-                <input type="time" placeholder="Enter Email" name="end_time" value="" required step="900"><br />
+                <input type="time" id="time_end_insert" placeholder="Enter Email" name="end_time" value="" required step="900"><br />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn">Login</button>
+                <button type="submit" class="btn">Afspraak inplannen</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </div>
             </form>
@@ -205,5 +209,30 @@
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
     }
+
+    $(document).ready(function(){
+        $('#country_name').keyup(function(){
+            var query = $(this).val();
+
+            if(query !== ''){
+                var _token = $('input[name="_token"]').val();
+
+                $.ajax({
+                    url:"{{route('fetch')}}",
+                    method:"POST",
+                    data:{query:query, _token:_token},
+                    success:function(data){
+                        $('#countryList').fadeIn();
+                        $('#countryList').html(data);
+                    }
+                })
+            }
+        })
+        $(document).on('click', 'li', function(){
+            $('#country_name').val($(this).text());
+            $('#countryList').fadeOut();
+        })
+    });
+
 </script>
 </html>

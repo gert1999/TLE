@@ -31,4 +31,4 @@ Route::get('/dashboard/load', [calendarController::class, 'load'])->name('load_c
 
 Route::post('/dashboard/insert', [calendarController::class, 'insert'])->name('insert_calendar');
 
-
+Route::post('/dashboard/fetch', [calendarController::class, 'fetch'])->name('fetch');
