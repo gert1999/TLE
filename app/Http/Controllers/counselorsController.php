@@ -25,7 +25,8 @@ class counselorsController extends Controller
         $studentNumber = DB::table('students')
             ->get();
 
-        if($studentID->id == ''){
+//        dd($studentID->id);
+        if($studentID->id == Null){
             echo '';
         }else {
             $feelings = DB::table('feelings')
