@@ -150,8 +150,9 @@
                     document.getElementById("email_insert2").value = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
                     document.getElementById("time_start_insert2").value = $.fullCalendar.formatDate(event.start, "HH:mm:ss");
                     document.getElementById("time_end_insert2").value = $.fullCalendar.formatDate(event.end, "HH:mm:ss");
-                    document.getElementById("student_id").value = event.id;
+                    document.getElementById("student_id").value = event.student_id;
                     document.getElementById("student_id2").value = event.id;
+                    document.getElementById("student_id3").value = event.id;
                 },
 
 
@@ -215,6 +216,7 @@
                     <label for="email"><b>Eind tijd</b></label>
                     <input type="time" id="time_end_insert2" placeholder="Enter Email" name="end_time2" value="" required step="900"><br />
                     <input type="text" id="student_id" placeholder="Enter student" name="student_id" required autocomplete="off" hidden>
+                    <input type="text" id="student_id3" placeholder="Enter student" name="student_id3" required autocomplete="off" hidden>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn">Afspraak bewerken</button>
@@ -224,7 +226,7 @@
             <form action="{{route('delete')}}" method="post">
                 @csrf
                 <input type="text" id="student_id2" placeholder="Enter student" name="student_id2" required autocomplete="off" hidden>
-                <button type="submit" style="padding:20px;text-align:center;width:100%;color:red;">Afspraak verwijderen</button>
+                <button type="submit" style="padding:20px;text-align:center;width:100%;color:red;background-color:white;">Afspraak verwijderen</button>
             </form>
         </div>
 

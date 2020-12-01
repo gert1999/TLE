@@ -42,7 +42,7 @@ class counselorsController extends Controller
                 $studentCount = $stuff->id;
             }
             $feeling = [];
-            for ($c = 0; $c < $studentCount +1; $c++) {
+            for ($c = 0; $c < $studentCount+1; $c++) {
                 $feeling[] = 0;
             }
             foreach ($feelings as $data) {
@@ -63,7 +63,7 @@ class counselorsController extends Controller
             }
 
 
-            return view('dashboard', compact('students', 'feeling', 'studentNumber'));
+            return view('dashboard', compact('students', 'feeling'));
         }
     }
     public function show($id){

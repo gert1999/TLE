@@ -16,8 +16,8 @@ class calendarController extends Controller
     public function load(){
         $data = array();
 
-        $events= DB::table('appointments')
-            ->join('students', 'appointments.student_id', '=', 'students.id')
+        $events= DB::table('students')
+            ->join('appointments', 'appointments.student_id', '=', 'students.id')
             ->where('appointments.counselor_id', auth()->user()->id)
 //            ->select('students.*')
             ->get();
@@ -26,6 +26,7 @@ class calendarController extends Controller
         {
             $data[] = array(
                 'id'   => $row->id,
+                'student_id'   => $row->student_id,
                 'title'   => $row->first_name. ' ' .$row->last_name,
                 'start'   => $row->start_time,
                 'end'   => $row->end_time
@@ -44,18 +45,19 @@ class calendarController extends Controller
         $datum_tijd_start = $datum. ' ' .$start_time;
         $datum_tijd_end = $datum. ' ' .$end_time;
 
-        $student = $request->input('student');
+        $student_id_add = $request->input('student_id_add');
 
-        $student_id = DB::table('students')
-                        ->select("*", DB::raw("CONCAT('first_name', 'last_name') AS $student"))
-//                        ->where('first_name', $request->input('student'))
-                        ->get();
+//        $student = $request->input('student');
 
-        foreach($student_id as $row) {
+//        $student_id = DB::table('students')
+//                        ->select("*", DB::raw("CONCAT('first_name', 'last_name') AS $student"))
+////                        ->where('first_name', $request->input('student'))
+//                        ->get();
             DB::table('appointments')->insert([
-                ['student_id' => $row->id, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
+                ['student_id' => $student_id_add, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
             ]);
-        }
+
+        return redirect('/dashboard/calendar');
     }
 
     function fetch(Request $request){
@@ -70,7 +72,7 @@ class calendarController extends Controller
             $output = '<ul class="dropdown-menu" style="display:block;position: absolute;margin-top:-313px;width:94%;margin-left:10px;padding-left:10px;">';
 
             foreach($data as $row){
-                $output .= '<li style="cursor:pointer;">' .$row->first_name. ' ' .$row->last_name. '</li>';
+                $output .= '<li style="cursor:pointer;">' .$row->first_name. ' ' .$row->last_name. '</li><input type="text" placeholder="Enter student" value="' .$row->id. '" name="student_id_add" required autocomplete="off" hidden>';
             }
             $output .= '</ul>';
             echo $output;
@@ -83,14 +85,18 @@ class calendarController extends Controller
 
         $end_time = $request->input('datum2'). ' ' .$request->input('end_time2');
 
-        $student_id = $request->input('student_id');
+        $student_id = $request->input('student_id3');
 
         DB::table('appointments')
-            ->where('student_id',  $student_id)
+            ->where('id',  $student_id)
             ->update(['start_time' => $start_time, 'end_time' => $end_time]);
+
+        return redirect('/dashboard/calendar');
     }
 
     function delete(Request $request){
-        DB::table('appointments')->where('student_id', $request->input('student_id2'))->delete();
+        DB::table('appointments')->where('id', $request->input('student_id2'))->delete();
+
+        return redirect('/dashboard/calendar');
     }
 }
