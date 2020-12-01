@@ -25,9 +25,13 @@ class counselorsController extends Controller
         $studentNumber = DB::table('students')
             ->get();
 
-        $feelings = DB::table('feelings')
-            ->where('student_id', $studentID->id)
-            ->get();
+        if($studentID->id == ''){
+            echo '';
+        }else {
+            $feelings = DB::table('feelings')
+                ->where('student_id', $studentID->id)
+                ->get();
+        }
 
 
 $feelingArray = [];

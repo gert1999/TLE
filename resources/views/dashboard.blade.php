@@ -42,12 +42,9 @@
             </thead>
             <tbody>
 
-
             @foreach($students as $row)
 
                 <tr>
-
-
                     <th scope="row">{{$row->id}}</th>
                     <td>{{$row->first_name}} {{$row->last_name}} </td>
                     <td>{{$row->email}}</td>
@@ -57,7 +54,6 @@
                         <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-edit"></i></button>
                         <button class="btn"><i class="fa fa-times"></i></button>
-
                     </td>
                     @if ($feeling[$row->id] >= 3)
                         <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
@@ -65,7 +61,6 @@
                         <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
                     @endif
                 </tr>
-
             @endforeach
             </tbody>
         </table>
