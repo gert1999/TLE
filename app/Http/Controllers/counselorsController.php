@@ -26,48 +26,45 @@ class counselorsController extends Controller
             ->get();
 
 //        dd($studentID->id);
-        if($studentID->id == Null){
-            echo '';
+        if($studentID== Null){
+            $students = [];
+            $feeling = [];
+            return view('dashboard', compact('students', 'feeling'));
         }else {
             $feelings = DB::table('feelings')
                 ->where('student_id', $studentID->id)
                 ->get();
-        }
 
 
-$feelingArray = [];
-$feelingID = [];
-foreach ($studentNumber as $stuff)
-{
-    $studentCount = $stuff->id;
-}
-$feeling =[];
-for ($c = 0;$c < $studentCount;$c++)
-{
-    $feeling[] = 0;
-}
-foreach ($feelings as $data) {
-    $inbetween = $data->score;
-    $IDbetween = $data->student_id;
-    $feelingArray[] = $inbetween;
-    $feelingID[] = $IDbetween;
-}
-        if(count($feelingArray)>=3) {
-            for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
-                if ($feelingArray[$i] < 3) {
-                    $feeling[$feelingID[$i]] = $feeling[$feelingID[$i]] + 1;
-                }
-                else
-                    {
-                        $feeling[$feelingID[$i]] = 0;
-                }
-
+            $feelingArray = [];
+            $feelingID = [];
+            foreach ($studentNumber as $stuff) {
+                $studentCount = $stuff->id;
             }
+            $feeling = [];
+            for ($c = 0; $c < $studentCount; $c++) {
+                $feeling[] = 0;
+            }
+            foreach ($feelings as $data) {
+                $inbetween = $data->score;
+                $IDbetween = $data->student_id;
+                $feelingArray[] = $inbetween;
+                $feelingID[] = $IDbetween;
+            }
+            if (count($feelingArray) >= 3) {
+                for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
+                    if ($feelingArray[$i] < 3) {
+                        $feeling[$feelingID[$i]] = $feeling[$feelingID[$i]] + 1;
+                    } else {
+                        $feeling[$feelingID[$i]] = 0;
+                    }
+
+                }
+            }
+
+
+            return view('dashboard', compact('students', 'feeling'));
         }
-
-
-        return view('dashboard', compact('students', 'feeling'));
-
     }
     public function show($id){
 
