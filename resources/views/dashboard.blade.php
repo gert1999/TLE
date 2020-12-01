@@ -1,7 +1,7 @@
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ public_path('css/font-awesome/css/font-awesome.min.css') }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
     .btn {
@@ -15,6 +15,36 @@
     .btn:hover {
         background-color: RoyalBlue;
     }
+    .switch3 {
+        display: none;
+    }
+    #switch2 {
+        display: none;
+        background-color: #3155ed;
+        border: none;
+        color: white;
+        padding: 9px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 10px 2px;
+        cursor: pointer;
+        float: right;
+        border-radius: 4px;
+    }
+    #switch{
+        background-color: #3155ed;
+        border: none;
+        color: white;
+        padding: 9px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 10px 2px;
+        cursor: pointer;
+        float: right;
+        border-radius: 4px;
+    }
 </style>
 
 <x-app-layout>
@@ -26,7 +56,6 @@
 
 {{--    Offset seen from top--}}
     <div class="container" style="margin-top:100px;">
-
     <div class="container">
         <table class="table">
             <thead>
@@ -41,10 +70,10 @@
             </tr>
             </thead>
             <tbody>
-
+            <button id="switch">Toon alle leerlingen</button>
+            <button id="switch2">leerling jouw klas</button>
             @foreach($students as $row)
-
-                <tr>
+                <tr id="switch1">
                     <th scope="row">{{$row->id}}</th>
                     <td>{{$row->first_name}} {{$row->last_name}} </td>
                     <td>{{$row->email}}</td>
@@ -62,6 +91,27 @@
                     @endif
                 </tr>
             @endforeach
+
+            @foreach($studentNumber as $row1)
+                <tr class="switch3">
+                    <th scope="row">{{$row1->id}}</th>
+                    <td>{{$row1->first_name}} {{$row1->last_name}} </td>
+                    <td>{{$row1->email}}</td>
+                    <td>{{$row1->created_at}}</td>
+                    <td>
+                        <a href="{{route('info', $row1->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
+                        <a href="{{route('show', $row1->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
+                        <button class="btn"><i class="fa fa-edit"></i></button>
+                        <button class="btn"><i class="fa fa-times"></i></button>
+                    </td>
+                    @if ($feeling[$row1->id] >= 3)
+                        <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
+                    @else
+                        <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
+                    @endif
+                </tr>
+            @endforeach
+
             </tbody>
         </table>
     </div>
@@ -69,6 +119,20 @@
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();
             });
-        </script>
 
+            $(document).ready(function(){
+                $('#switch').click(function() {
+                    $('#switch1').hide();
+                    $('#switch').hide();
+                    $('.switch3').show();
+                    $('#switch2').show();
+                })
+                $('#switch2').click(function() {
+                    $('#switch1').show();
+                    $('#switch').show();
+                    $('.switch3').hide();
+                    $('#switch2').hide();
+                })
+            });
+        </script>
 </x-app-layout>

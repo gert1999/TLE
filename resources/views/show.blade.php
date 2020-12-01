@@ -16,7 +16,7 @@
 
     //loop through the returned data
     while ($row = mysqli_fetch_array($result)) {
-        $data1 = $data1 . '"'. $row['score'].'",';
+        $data1 = $data1 . '"'. $row['score'].'",' .  $resul = $row['comment'].'",';
     }
 
     $row2 = mysqli_num_rows($result);
@@ -25,6 +25,7 @@
     $sql2 = "SELECT `created_at` from feelings WHERE `student_id` = $id";
     $result2 = mysqli_query($mysqli, $sql2);
 
+//    print_r($data1);
     while ($row3 = mysqli_fetch_array($result2))
     {
         $row3['created_at'];
@@ -175,6 +176,7 @@
 
                 labelsData.push(users[i-1]);
             }
+
 
                 let data = {
                     labels: labelsData,
