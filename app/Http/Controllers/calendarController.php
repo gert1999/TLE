@@ -44,9 +44,11 @@ class calendarController extends Controller
         $datum_tijd_start = $datum. ' ' .$start_time;
         $datum_tijd_end = $datum. ' ' .$end_time;
 
+        $student = $request->input('student');
 
         $student_id = DB::table('students')
-                        ->where('first_name', $request->input('student'))
+                        ->select("*", DB::raw("CONCAT('first_name', 'last_name') AS $student"))
+//                        ->where('first_name', $request->input('student'))
                         ->get();
 
         foreach($student_id as $row) {
@@ -73,5 +75,22 @@ class calendarController extends Controller
             $output .= '</ul>';
             echo $output;
         }
+    }
+
+    function edit(Request $request){
+
+        $start_time = $request->input('datum2'). ' ' .$request->input('start_time2');
+
+        $end_time = $request->input('datum2'). ' ' .$request->input('end_time2');
+
+        $student_id = $request->input('student_id');
+
+        DB::table('appointments')
+            ->where('student_id',  $student_id)
+            ->update(['start_time' => $start_time, 'end_time' => $end_time]);
+    }
+
+    function delete(Request $request){
+        DB::table('appointments')->where('student_id', $request->input('student_id2'))->delete();
     }
 }

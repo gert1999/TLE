@@ -86,6 +86,7 @@
                 select: function(start, end, allDay)
                 {
                     document.getElementById("myForm").style.display = "block";
+                    document.getElementById("myForm_edit").style.display = "none";
                     document.getElementById("email_insert").value = $.fullCalendar.formatDate(start, "Y-MM-DD");
                     document.getElementById("time_start_insert").value = $.fullCalendar.formatDate(start, "HH:mm:ss");
                     document.getElementById("time_end_insert").value = $.fullCalendar.formatDate(end, "HH:mm:ss");
@@ -144,21 +145,15 @@
 
                 eventClick:function(event)
                 {
-                    if(confirm("Are you sure you want to remove it?"))
-                    {
-                        var id = event.id;
-                        $.ajax({
-                            url:"delete.php",
-                            type:"POST",
-                            data:{id:id},
-                            success:function()
-                            {
-                                calendar.fullCalendar('refetchEvents');
-                                alert("Event Removed");
-                            }
-                        })
-                    }
+                    document.getElementById("myForm_edit").style.display = "block";
+                    document.getElementById("myForm").style.display = "none";
+                    document.getElementById("email_insert2").value = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                    document.getElementById("time_start_insert2").value = $.fullCalendar.formatDate(event.start, "HH:mm:ss");
+                    document.getElementById("time_end_insert2").value = $.fullCalendar.formatDate(event.end, "HH:mm:ss");
+                    document.getElementById("student_id").value = event.id;
+                    document.getElementById("student_id2").value = event.id;
                 },
+
 
             });
         });
@@ -203,6 +198,36 @@
             </div>
             </form>
         </div>
+
+        <div class="form-popup" id="myForm_edit">
+            <form action="{{route('edit_calendar')}}" method="post" class="form-container">
+                @csrf
+                <h1 style="padding-bottom:20px;">Afspraak bewerken</h1>
+                <div class="form-group">
+                    <label for="email"><b>Datum</b></label>
+                    <input type="date" id="email_insert2" placeholder="Enter Email" name="datum2" value="" required><br />
+                </div>
+                <div class="form-group">
+                    <label for="email"><b>Start tijd</b></label>
+                    <input type="time" id="time_start_insert2" placeholder="Enter Email" name="start_time2" value="" required step="900"><br />
+                </div>
+                <div class="form-group">
+                    <label for="email"><b>Eind tijd</b></label>
+                    <input type="time" id="time_end_insert2" placeholder="Enter Email" name="end_time2" value="" required step="900"><br />
+                    <input type="text" id="student_id" placeholder="Enter student" name="student_id" required autocomplete="off" hidden>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn">Afspraak bewerken</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </div>
+            </form>
+            <form action="{{route('delete')}}" method="post">
+                @csrf
+                <input type="text" id="student_id2" placeholder="Enter student" name="student_id2" required autocomplete="off" hidden>
+                <button type="submit" style="padding:20px;text-align:center;width:100%;color:red;">Afspraak verwijderen</button>
+            </form>
+        </div>
+
     </x-app-layout>
 </body>
 <script>
