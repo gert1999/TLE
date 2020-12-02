@@ -16,7 +16,7 @@
 
     //loop through the returned data
     while ($row = mysqli_fetch_array($result)) {
-        $data1 = $data1 . '"'. $row['score'].'",' .  $resul = $row['comment'].'",';
+        $data1 = $data1 . '"'. $row['score'].'",' ;
     }
 
     $row2 = mysqli_num_rows($result);
