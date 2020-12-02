@@ -31,6 +31,9 @@
                     <x-jet-nav-link href="{{ route('calendar') }}" :active="request()->routeIs('calendar')">
                         {{ __('Agenda') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('aangevraagde_gesprekken') }}" :active="request()->routeIs('aangevraagde_gesprekken')">
+                        {{ __('Aangevraagde gesprekken') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 

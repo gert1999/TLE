@@ -99,4 +99,14 @@ class calendarController extends Controller
 
         return redirect('/dashboard/calendar');
     }
+
+    function aangevraagd(){
+        $students = DB::table('students')
+            ->join('appointments', 'students.id', '=', 'appointments.student_id')
+            ->where('appointments.counselor_id', auth()->user()->id)
+//            ->select('students.*')
+            ->get();
+
+        return view('gesprekken.aangevraagd', compact('students'));
+    }
 }
