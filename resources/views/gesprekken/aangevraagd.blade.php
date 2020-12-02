@@ -28,7 +28,7 @@
         /* Add styles to the form container */
         .form-container {
             max-width: 300px;
-            height:430px;
+            height:300px;
             padding: 10px;
             background-color: white;
         }
@@ -101,66 +101,40 @@
                                     <img src="/images/avatar/7 Avatar.png" style="width:60%">
                                 @elseif($row->avatar == 'monster-8')
                                     <img src="/images/avatar/8 Avatar.png" style="width:60%">
+                                @elseif($row->avatar == '')
+                                    <img src="{{asset('images/nopicture.png')}}" style="width:60%">
                                 @endif
                             </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="card1">
-                            <p>ID: {{$row->id}}</p>
-                            <p>Voornaam: {{$row->first_name}}</p>
-                            <p>Achternaam: {{$row->last_name}}</p>
-                            <p>Nickname: {{$row->nickname}}</p>
-                            <p>Email: {{$row->email}}</p>
+                            <p><b>ID:</b> {{$row->id}}</p>
+                            <p><b>Voornaam:</b> {{$row->first_name}}</p>
+                            <p><b>Achternaam:</b> {{$row->last_name}}</p>
+                            <p><b>Nickname:</b> {{$row->nickname}}</p>
+                            <p><b>Email:</b> {{$row->email}}</p>
                             <br>
                         </div>
                     </div>
-                    <div class="col-5">
-                        <div class="card1">
-                            <p>Color: {{$row->color}}</p>
-                            <p>Hobby's: {{$row->interests}}</p>
-                            <p>Aangemaakt op: {{$row->created_at}}</p>
-                            <br>
-                            <input type="text" id="student_id5" placeholder="Enter student" name="student_id5" value="{{$row->id}}" required autocomplete="off">
-                            <button onclick="formshow()"><p style="font-size:16px;">Afspraak plannen <i class="fa fa-arrow-circle-o-right"></i></p></button>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
-                <div class="form-popup" id="myForm_edit">
-                    <form action="{{route('edit_calendar')}}" method="post" class="form-container">
+                    <form action="{{route('edit_aangevraagd')}}" method="post" class="form-container">
                         @csrf
-                        <h1 style="padding-bottom:20px;">Afspraak bewerken</h1>
-                        <div class="form-group">
-                            <label for="email"><b>Datum</b></label>
-                            <input type="date" id="email_insert2" placeholder="Enter Email" name="datum2" value="" required><br />
-                        </div>
-                        <div class="form-group">
-                            <label for="email"><b>Start tijd</b></label>
-                            <input type="time" id="time_start_insert2" placeholder="Enter Email" name="start_time2" value="" required step="900"><br />
-                        </div>
-                        <div class="form-group">
-                            <label for="email"><b>Eind tijd</b></label>
-                            <input type="time" id="time_end_insert2" placeholder="Enter Email" name="end_time2" value="" required step="900"><br />
-                            <input type="text" id="student_id" placeholder="Enter student" name="student_id" required autocomplete="off" hidden>
-                            <input type="text" id="student_id4" placeholder="Enter student" name="student_id4" required autocomplete="off">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn">Afspraak bewerken</button>
-                            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        <div class="col-12">
+                            <div class="card1">
+                                <p><b>Datum:</b><input type="date" id="email_insert" placeholder="Enter Email" name="datum" value="" required style="border:1px solid black; margin-left:15px;"><br /></p>
+                                <p><b>Start tijd:</b><input type="time" id="time_start_insert" placeholder="Enter Email" name="start_time" value="" required step="900" style="border:1px solid black"><br /></p>
+                                <p><b>Eind tijd:</b><input type="time" id="time_end_insert" placeholder="Enter Email" name="end_time" value="" required step="900" style="border:1px solid black; margin-left:1px;"><br /></p>
+                                <br>
+                                <input type="text" id="student_id5" placeholder="Enter student" name="student_id5" value="{{$row->id}}" required autocomplete="off" hidden>
+                                <button><p style="font-size:16px;">Afspraak plannen <i class="fa fa-arrow-circle-o-right"></i></p></button>
+                            </div>
                         </div>
                     </form>
                 </div>
+            @endforeach
+
         </div>
         </div>
 </x-app-layout>
-<script>
-    function formshow(){
-        var id = document.getElementById("student_id5").value;
-        document.getElementById("myForm_edit").style.display = "block";
-        document.getElementById("student_id4").value = id;
-    }
-</script>
 </body>
 </html>

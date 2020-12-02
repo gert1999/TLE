@@ -38,3 +38,5 @@ Route::post('/dashboard/delete', [calendarController::class, 'delete'])->name('d
 Route::post('/dashboard/fetch', [calendarController::class, 'fetch'])->name('fetch');
 
 Route::get('/dashboard/gesprekken/aangevraagd', [calendarController::class, 'aangevraagd'])->name('aangevraagde_gesprekken');
+
+Route::post('/dashboard/gesprekken/aangevraagd/edit', [calendarController::class, 'edit_aangevraagd'])->name('edit_aangevraagd');

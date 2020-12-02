@@ -109,4 +109,7 @@ class calendarController extends Controller
 
         return view('gesprekken.aangevraagd', compact('students'));
     }
+    function edit_aangevraagd(){
+
+    }
 }

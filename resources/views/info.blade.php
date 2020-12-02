@@ -35,6 +35,8 @@
                                 <img src="/images/avatar/7 Avatar.png" style="width:100%">
                             @elseif($row->avatar == 'monster-8')
                                 <img src="/images/avatar/8 Avatar.png" style="width:100%">
+                            @elseif($row->avatar == '')
+                                <img src="{{asset('images/nopicture.png')}}" style="width:100%">
                             @endif
                         </div>
                     </div>
