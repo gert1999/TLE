@@ -220,7 +220,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn">Afspraak bewerken</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
                 </div>
             </form>
             <form action="{{route('delete')}}" method="post">
@@ -235,6 +235,10 @@
 <script>
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
+    }
+
+    function closeForm2() {
+        document.getElementById("myForm_edit").style.display = "none";
     }
 
     $(document).ready(function(){

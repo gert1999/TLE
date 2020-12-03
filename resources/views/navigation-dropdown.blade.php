@@ -1,10 +1,20 @@
 <link href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}" rel="stylesheet">
 <style>
     .badge {
-        position: absolute;
-        top: -10px;
-        right: 10px;
+        position: relative;
+        top: -13px;
+        right: 7px;
         padding: 2.5px 5px;
+        border-radius: 50%;
+        background-color: red;
+        color: white;
+        font-size:8px;
+    }
+    .badge2 {
+        position: relative;
+        top: -15px;
+        right: 10px;
+        padding: 0.1px 6px;
         border-radius: 50%;
         background-color: red;
         color: white;
@@ -33,6 +43,11 @@
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('aangevraagde_gesprekken') }}" :active="request()->routeIs('aangevraagde_gesprekken')" style="text-decoration: none;">
                         {{ __('Aangevraagde gesprekken') }}
+                        @if($students_count2 == 0)
+
+                        @else
+                            <span class="badge">{{$students_count2}}</span>
+                        @endif
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -154,10 +169,15 @@
                         @foreach($appointments as $rows)
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __($rows->first_name. ' ' .$rows->last_name) }}<br />
-                                {{ __($rows->appointment_date) }}
+                                <div class="text-xs text-gray-400">
+                                    {{ __($rows->start_time) }}
+                                </div>
+
                             </x-jet-dropdown-link>
                         @endforeach
-                        <div class="border-t border-gray-100"></div>
+                        <a href="{{route('calendar')}}"><div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('Alle afspraken') }}
+                            </div></a>
                     </x-slot>
 
                 </x-jet-dropdown>

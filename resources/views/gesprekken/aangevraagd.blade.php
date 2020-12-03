@@ -80,59 +80,62 @@
     </x-slot>
     <div class="container" style="margin-top:100px;">
         <div class="container">
-            @foreach($students as $row)
-                <div class="row rowcard" style="margin-top:30px;">
-                    <div class="col-4">
-                        <div class="card" style="border:none!important">
-                            <div class="col-8">
-                                @if($row->avatar == 'monster-1')
-                                    <img src="/images/avatar/1 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-2')
-                                    <img src="/images/avatar/2 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-3')
-                                    <img src="/images/avatar/3 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-4')
-                                    <img src="/images/avatar/4 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-5')
-                                    <img src="/images/avatar/5 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-6')
-                                    <img src="/images/avatar/6 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-7')
-                                    <img src="/images/avatar/7 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == 'monster-8')
-                                    <img src="/images/avatar/8 Avatar.png" style="width:60%">
-                                @elseif($row->avatar == '')
-                                    <img src="{{asset('images/nopicture.png')}}" style="width:60%">
-                                @endif
+            @if($students_count == 0)
+                <h1>Op dit moment zijn er geen aangevraagde gesprekken.</h1>
+            @else
+                @foreach($students as $row)
+                    <div class="row rowcard" style="margin-top:30px;">
+                        <div class="col-4">
+                            <div class="card" style="border:none!important">
+                                <div class="col-8">
+                                    @if($row->avatar == 'monster-1')
+                                        <img src="/images/avatar/1 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-2')
+                                        <img src="/images/avatar/2 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-3')
+                                        <img src="/images/avatar/3 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-4')
+                                        <img src="/images/avatar/4 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-5')
+                                        <img src="/images/avatar/5 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-6')
+                                        <img src="/images/avatar/6 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-7')
+                                        <img src="/images/avatar/7 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == 'monster-8')
+                                        <img src="/images/avatar/8 Avatar.png" style="width:60%">
+                                    @elseif($row->avatar == '')
+                                        <img src="{{asset('images/nopicture.png')}}" style="width:60%">
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card1">
-                            <p><b>ID:</b> {{$row->id}}</p>
-                            <p><b>Voornaam:</b> {{$row->first_name}}</p>
-                            <p><b>Achternaam:</b> {{$row->last_name}}</p>
-                            <p><b>Nickname:</b> {{$row->nickname}}</p>
-                            <p><b>Email:</b> {{$row->email}}</p>
-                            <br>
-                        </div>
-                    </div>
-                    <form action="{{route('edit_aangevraagd')}}" method="post" class="form-container">
-                        @csrf
-                        <div class="col-12">
+                        <div class="col-3">
                             <div class="card1">
-                                <p><b>Datum:</b><input type="date" id="email_insert" placeholder="Enter Email" name="datum" value="" required style="border:1px solid black; margin-left:15px;"><br /></p>
-                                <p><b>Start tijd:</b><input type="time" id="time_start_insert" placeholder="Enter Email" name="start_time" value="" required step="900" style="border:1px solid black"><br /></p>
-                                <p><b>Eind tijd:</b><input type="time" id="time_end_insert" placeholder="Enter Email" name="end_time" value="" required step="900" style="border:1px solid black; margin-left:1px;"><br /></p>
+                                <p><b>ID:</b> {{$row->student_id}}</p>
+                                <p><b>Voornaam:</b> {{$row->first_name}}</p>
+                                <p><b>Achternaam:</b> {{$row->last_name}}</p>
+                                <p><b>Nickname:</b> {{$row->nickname}}</p>
+                                <p><b>Email:</b> {{$row->email}}</p>
                                 <br>
-                                <input type="text" id="student_id5" placeholder="Enter student" name="student_id5" value="{{$row->id}}" required autocomplete="off" hidden>
-                                <button><p style="font-size:16px;">Afspraak plannen <i class="fa fa-arrow-circle-o-right"></i></p></button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            @endforeach
-
+                        <form action="{{route('edit_aangevraagd')}}" method="post" class="form-container">
+                            @csrf
+                            <div class="col-12">
+                                <div class="card1">
+                                    <p><b>Datum:</b><input type="date" id="email_insert" placeholder="Enter Email" name="datum_aangevraagd" value="<?php echo date('Y-m-d'); ?>" required style="border:1px solid black; margin-left:15px;"><br /></p>
+                                    <p><b>Start tijd:</b><input type="time" id="time_start_insert" placeholder="Enter Email" name="start_time_aangevraagd" value="" required step="900" style="border:1px solid black"><br /></p>
+                                    <p><b>Eind tijd:</b><input type="time" id="time_end_insert" placeholder="Enter Email" name="end_time_aangevraagd" value="" required step="900" style="border:1px solid black; margin-left:1px;"><br /></p>
+                                    <br>
+                                    <input type="text" id="student_id5" placeholder="Enter student" name="student_id_aangevraagd" value="{{$row->id}}" required autocomplete="off" hidden>
+                                    <button><p style="font-size:16px;">Afspraak plannen <i class="fa fa-arrow-circle-o-right"></i></p></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                @endforeach
+            @endif
         </div>
         </div>
 </x-app-layout>

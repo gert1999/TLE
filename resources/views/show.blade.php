@@ -134,7 +134,7 @@
     </div>
 
     <div class="container">
-        <table class="table" style="margin-top:100px;">
+        <table class="table">
             <thead>
             <tr>
                 <th scope="col">Gevoel</th>
