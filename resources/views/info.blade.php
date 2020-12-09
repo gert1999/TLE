@@ -41,9 +41,15 @@
                         </div>
                     </div>
                 </div>
+                    <div class="col-8">
+                        <div class="card2">
+                            <h1>Profiel :{{$row->first_name}} {{$row->last_name}}</h1>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                    </div>
                 <div class="col-3">
                     <div class="card1">
-                        <p>Profiel :{{$row->first_name}} {{$row->last_name}}</p>
                         <p>Nickname: </p>
                         <p>Email:</p>
                         <p>Color:</p>

@@ -23,6 +23,7 @@ class counselorsController extends Controller
             ->first();
 
         $studentNumber = DB::table('students')
+            ->where('status', 'active')
             ->get();
 
 //        dd($studentID->id);
@@ -84,6 +85,17 @@ class counselorsController extends Controller
 
         return view('show', compact('feeling', 'id', 'student'));
     }
+
+    public function delete($id){
+
+//        $feeling = Feelings::find($id);
+        DB::table('students')
+            ->where('id', $id)
+            ->update(['status' => 'inactive']);
+
+        return redirect('/dashboard');
+    }
+
     public function info($id){
 
         $students = DB::table('students')

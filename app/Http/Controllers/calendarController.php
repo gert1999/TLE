@@ -19,6 +19,7 @@ class calendarController extends Controller
         $events= DB::table('students')
             ->join('appointments', 'appointments.student_id', '=', 'students.id')
             ->where('appointments.counselor_id', auth()->user()->id)
+            ->where('appointments.attending', 1)
 //            ->select('students.*')
             ->get();
 
