@@ -16,7 +16,7 @@
 
     //loop through the returned data
     while ($row = mysqli_fetch_array($result)) {
-        $data1 = $data1 . '"'. $row['score'].'",' ;
+        $data1 = $data1. '"'. $row['score'].'",' ;
     }
 
     $row2 = mysqli_num_rows($result);
@@ -55,7 +55,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 <script type="text/javascript" src="https://rawgit.com/nnnick/Chart.js/v1.0.2/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link href="{{ asset('css/opmaak.css') }}" rel="stylesheet">
 
 <style>
     .chartWrapper {/* w w w. j a v  a2 s.co  m*/
@@ -131,9 +131,7 @@
 
         </div>
         <?php echo "<h1 style='font-size:30px;text-align:center;position:relative;top:40px;'>$error</h1>"; ?>
-    </div>
 
-    <div class="container">
         <table class="table" style="margin-top:100px;">
             <thead>
             <tr>
@@ -216,5 +214,9 @@
                 });
         </script>
     </div>
+    <footer class="page-footer">
+        <div class="footer-copyright text-center py-3">© 2020 HAPPY
+        </div>
+    </footer>
 </x-app-layout>
 

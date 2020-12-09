@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ public_path('css/font-awesome/css/font-awesome.min.css') }}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<link href="{{ asset('css/opmaak.css') }}" rel="stylesheet">
 <style>
     .btn {
         background-color: #f5d142;
@@ -45,6 +45,9 @@
         float: right;
         border-radius: 4px;
     }
+
+
+
 </style>
 
 <x-app-layout>
@@ -115,6 +118,11 @@
             </tbody>
         </table>
     </div>
+    </div>
+        <footer class="page-footer">
+        <div class="footer-copyright text-center py-3">© 2020 HAPPY
+        </div>
+    </footer>
         <script>
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();
@@ -136,3 +144,4 @@
             });
         </script>
 </x-app-layout>
+
