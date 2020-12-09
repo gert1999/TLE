@@ -109,7 +109,7 @@
                         <a href="{{route('info', $row1->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                         <a href="{{route('show', $row1->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-edit"></i></button>
-                        <button class="btn"><i class="fa fa-times"></i></button>
+                        <button class="btn" onclick="alert()"><i class="fa fa-times"></i></button>
                     </td>
                     @if ($feeling[$row1->id] >= 3)
                         <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
