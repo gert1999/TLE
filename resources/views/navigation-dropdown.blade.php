@@ -167,7 +167,7 @@
                             {{ __('Afspraken') }}
                         </div>
                         @foreach($appointments as $rows)
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-jet-dropdown-link href="/show/{{$rows->id}}">
                                 {{ __($rows->first_name. ' ' .$rows->last_name) }}<br />
                                 <div class="text-xs text-gray-400">
                                     {{ __($rows->start_time) }}
