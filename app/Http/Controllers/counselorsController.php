@@ -30,7 +30,8 @@ class counselorsController extends Controller
         if($studentID== Null){
             $students = [];
             $feeling = [];
-            return view('dashboard', compact('students', 'feeling'));
+            $studentNumber = [];
+            return view('dashboard', compact('students', 'feeling', 'studentNumber'));
         }else {
             $feelings = DB::table('feelings')
                 ->where('student_id', $studentID->id)
@@ -73,7 +74,7 @@ class counselorsController extends Controller
         $feeling = DB::table('feelings')
             ->where('student_id', $id)
             ->orderBy('id', 'DESC')
-            ->get();
+            ->paginate(8);
 
         if($feeling === null){
             abort(404, "Dit pagina is helaas niet gevonden");

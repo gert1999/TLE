@@ -43,19 +43,23 @@
                 </div>
                 <div class="col-3">
                     <div class="card1">
-                        <p>ID: {{$row->id}}</p>
-                        <p>Voornaam: {{$row->first_name}}</p>
-                        <p>Achternaam: {{$row->last_name}}</p>
-                        <p>Nickname: {{$row->nickname}}</p>
-                        <p>Email: {{$row->email}}</p>
+                        <p>Profiel :{{$row->first_name}} {{$row->last_name}}</p>
+                        <p>Nickname: </p>
+                        <p>Email:</p>
+                        <p>Color:</p>
+                        <p>Hobby's:</p>
+                        <p>Aangemaakt op: </p>
                         <br>
                     </div>
                 </div>
                     <div class="col-5">
                         <div class="card1">
-                            <p>Color: {{$row->color}}</p>
-                            <p>Hobby's: {{$row->interests}}</p>
-                            <p>Aangemaakt op: {{$row->created_at}}</p>
+                            <p> </p>
+                            <p>{{$row->nickname}}</p>
+                            <p>{{$row->email}}</p>
+                            <p>{{$row->color}}</p>
+                            <p>{{$row->interests}}</p>
+                            <p>{{$row->created_at}}</p>
                             <br>
                         </div>
                     </div>
@@ -63,4 +67,8 @@
         @endforeach
         </div>
     </div>
+    <footer class="page-footer">
+        <div class="footer-copyright text-center py-3">© 2020 HAPPY
+        </div>
+    </footer>
 </x-app-layout>
