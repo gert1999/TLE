@@ -75,8 +75,10 @@
             <tbody>
             <button id="switch">Toon alle leerlingen</button>
             <button id="switch2">Toon eigen klas</button>
+            <button id="active">Toon inactieve leerlingen</button>
+            <button id="active2">Toon actieve leerlingen</button>
             @foreach($students as $row)
-                <tr id="switch1">
+                <tr id="switch1" >
                     <th scope="row">{{$row->id}}</th>
                     <td>{{$row->first_name}} {{$row->last_name}} </td>
                     <td>{{$row->email}}</td>
@@ -141,6 +143,21 @@
                     $('.switch3').hide();
                     $('#switch2').hide();
                 })
+
+
+                $('#active').click(function() {
+                    // $('#switch1').hide();
+                    $('#active').hide();
+                    // $('.switch3').show();
+                    $('#active2').show();
+                })
+                $('#active2').click(function() {
+                    // $('#switch1').show();
+                    $('#active').show();
+                    // $('.switch3').hide();
+                    $('#active2').hide();
+                })
+
             });
         </script>
 </x-app-layout>
