@@ -134,6 +134,9 @@
     </div>
 
     <div class="container">
+        <div style="padding-bottom:20px;">
+            {{$feeling->links()}}
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -163,9 +166,7 @@
             </tbody>
         </table>
     </div>
-<div>
-    {{$feeling->links()}}
-</div>
+
 
         <script>
             var ctx = document.getElementById("myChart").getContext("2d");
