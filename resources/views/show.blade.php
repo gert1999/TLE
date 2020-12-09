@@ -163,6 +163,9 @@
             </tbody>
         </table>
     </div>
+<div>
+    {{$feeling->links()}}
+</div>
 
         <script>
             var ctx = document.getElementById("myChart").getContext("2d");
