@@ -194,7 +194,7 @@
                 <input type="time" id="time_end_insert" placeholder="Enter Email" name="end_time" value="" required step="900"><br />
             </div>
             <div class="form-group">
-                <button type="submit" class="btn">Afspraak inplannen</button>
+                <button type="submit" id="btn-inplannen" onclick="setTimeout(myFunction, 100);" class="btn">Afspraak inplannen</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </div>
             </form>
@@ -270,5 +270,8 @@
 
     });
 
+    function myFunction() {
+        document.getElementById("btn-inplannen").disabled = true;
+    }
 </script>
 </html>
