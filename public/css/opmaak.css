@@ -74,15 +74,15 @@ button:hover, a:hover {
     padding-bottom: 1.5rem;
 }
 
-span.relative.z-0{
-    position: absolute!important;
-    left: 0px;
-    background: #f4f5f7;
-}
+/*span.relative.z-0{*/
+/*    position: absolute!important;*/
+/*    left: 0px;*/
+/*    background: #f4f5f7;*/
+/*}*/
 
-p.leading-5{
-    position: absolute;
-    right: 0px;
-    background-color: #ffffff;
-    padding: 10px;
-}
+/*p.leading-5{*/
+/*    position: absolute;*/
+/*    right: 0px;*/
+/*    background-color: #ffffff;*/
+/*    padding: 10px;*/
+/*}*/
