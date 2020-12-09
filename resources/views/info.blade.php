@@ -41,6 +41,13 @@
                         </div>
                     </div>
                 </div>
+                    <div class="col-8">
+                        <div class="card2">
+                            <p>Profiel :{{$row->first_name}} {{$row->last_name}}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                    </div>
                 <div class="col-3">
                     <div class="card1">
                         <p>Profiel :{{$row->first_name}} {{$row->last_name}}</p>
