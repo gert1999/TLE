@@ -9,7 +9,7 @@
         border: none;
         color: white;
         padding: 8px;
-        font-size: 12px;
+        font-size: 15px;
         cursor: pointer;
     }
     .btn:hover {
@@ -73,23 +73,27 @@
             <button id="switch">Toon alle leerlingen</button>
             <button id="switch2">Toon eigen klas</button>
             @foreach($students as $row)
-                <tr id="switch1">
-                    <th scope="row">{{$row->id}}</th>
-                    <td>{{$row->first_name}} {{$row->last_name}} </td>
-                    <td>{{$row->email}}</td>
-                    <td>{{$row->created_at}}</td>
-                    <td>
-                        <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
-                        <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
-                        <button class="btn"><i class="fa fa-edit"></i></button>
-                        <button class="btn"><i class="fa fa-times"></i></button>
-                    </td>
-                    @if ($feeling[$row->id] >= 3)
-                        <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
-                    @else
-                        <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
-                    @endif
-                </tr>
+                @if($row->status == 'active')
+                    <tr id="switch1">
+                        <th scope="row">{{$row->id}}</th>
+                        <td>{{$row->first_name}} {{$row->last_name}} </td>
+                        <td>{{$row->email}}</td>
+                        <td>{{$row->created_at}}</td>
+                        <td>
+                            <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
+                            <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
+                            <button class="btn"><i class="fa fa-edit"></i></button>
+                            <button class="btn" onclick="alert()"><i class="fa fa-times"></i></button>
+                        </td>
+                        @if ($feeling[$row->id] >= 3)
+                            <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
+                        @else
+                            <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
+                        @endif
+                    </tr>
+                @else
+
+                @endif
             @endforeach
 
             @foreach($studentNumber as $row1)
@@ -134,5 +138,16 @@
                     $('#switch2').hide();
                 })
             });
+
+            function alert() {
+                if (confirm('Are you sure you want to save this thing into the database?')) {
+                    // Save it!
+                    console.log('Thing was saved to the database.');
+                    window.location.assign("/delete/{{$row->id}}");
+                } else {
+                    // Do nothing!
+                    console.log('Thing was not saved to the database.');
+                }
+            }
         </script>
 </x-app-layout>

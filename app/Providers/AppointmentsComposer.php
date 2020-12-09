@@ -18,6 +18,7 @@ class AppointmentsComposer
                 ->join('students', 'appointments.student_id', '=', 'students.id')
                 ->where('appointments.counselor_id', Auth::user()->id)
                 ->where('start_time','>=','2020-01-01 14:00:00')
+                ->where('appointments.attending', 1)
                 ->paginate(5);
 
 
@@ -25,6 +26,7 @@ class AppointmentsComposer
             $appointments2 = DB::table('appointments')
                 ->join('students', 'appointments.student_id', '=', 'students.id')
                 ->where('appointments.counselor_id', Auth::user()->id)
+                ->where('appointments.attending', 1)
                 ->where('start_time','>=','2020-01-01 14:00:00')
                 ->count();
             //        $appointments = Carbon::createFromFormat('Y-m-d H:i:s', $appointments)->format('d/m/Y');
