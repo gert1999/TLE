@@ -74,7 +74,7 @@
             </thead>
             <tbody>
             <button id="switch">Toon alle leerlingen</button>
-            <button id="switch2">leerling jouw klas</button>
+            <button id="switch2">Toon eigen klas</button>
             @foreach($students as $row)
                 <tr id="switch1">
                     <th scope="row">{{$row->id}}</th>

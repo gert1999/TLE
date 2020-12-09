@@ -99,4 +99,37 @@ class calendarController extends Controller
 
         return redirect('/dashboard/calendar');
     }
+
+    function aangevraagd(){
+        $students = DB::table('students')
+            ->join('appointments', 'students.id', '=', 'appointments.student_id')
+            ->where('appointments.counselor_id', auth()->user()->id)
+            ->where('appointments.start_time', Null)
+            ->orWhere('appointments.start_time', '0000-00-00 00:00:00')
+//            ->select('students.*')
+            ->get();
+
+        $students_count = DB::table('students')
+            ->join('appointments', 'students.id', '=', 'appointments.student_id')
+            ->where('appointments.counselor_id', auth()->user()->id)
+            ->where('appointments.start_time', Null)
+            ->orWhere('appointments.start_time', '0000-00-00 00:00:00')
+//            ->select('students.*')
+            ->count();
+
+        return view('gesprekken.aangevraagd', compact('students', 'students_count'));
+    }
+    function edit_aangevraagd(Request $request){
+        $start_time_aangevraagd = $request->input('datum_aangevraagd'). ' ' .$request->input('start_time_aangevraagd');
+
+        $end_time_aangevraagd = $request->input('datum_aangevraagd'). ' ' .$request->input('end_time_aangevraagd');
+
+        $student_id_aangevraagd = $request->input('student_id_aangevraagd');
+
+        DB::table('appointments')
+            ->where('id',  $student_id_aangevraagd)
+            ->update(['start_time' => $start_time_aangevraagd, 'end_time' => $end_time_aangevraagd]);
+
+        return redirect('/dashboard/gesprekken/aangevraagd');
+    }
 }

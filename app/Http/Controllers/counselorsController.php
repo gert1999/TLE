@@ -63,7 +63,7 @@ class counselorsController extends Controller
             }
 
 
-            return view('dashboard', compact('students', 'feeling','studentNumber'));
+            return view('dashboard', compact('students', 'feeling', 'studentNumber'));
         }
     }
     public function show($id){
