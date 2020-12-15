@@ -77,7 +77,7 @@
             <button id="switch2">Toon eigen klas</button>
             @foreach($students as $row)
                 @if($row->status == 'active')
-                    <tr id="switch1">
+                    <tr class="switch1">
                         <th scope="row">{{$row->id}}</th>
                         <td>{{$row->first_name}} {{$row->last_name}} </td>
                         <td>{{$row->email}}</td>
@@ -134,13 +134,13 @@
 
             $(document).ready(function(){
                 $('#switch').click(function() {
-                    $('#switch1').hide();
+                    $('.switch1').hide();
                     $('#switch').hide();
                     $('.switch3').show();
                     $('#switch2').show();
                 })
                 $('#switch2').click(function() {
-                    $('#switch1').show();
+                    $('.switch1').show();
                     $('#switch').show();
                     $('.switch3').hide();
                     $('#switch2').hide();

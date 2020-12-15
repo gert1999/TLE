@@ -15,7 +15,7 @@ class counselorsController extends Controller
             ->join('students', 'counselors.id', '=', 'students.counselor_id')
             ->where('students.counselor_id', auth()->user()->id)
             ->select('students.*')
-            ->get();
+            ->paginate(10);
 
         $studentID = DB::table('counselors')
             ->join('students', 'counselors.id', '=', 'students.counselor_id')
@@ -25,6 +25,10 @@ class counselorsController extends Controller
         $studentNumber = DB::table('students')
             ->where('status', 'active')
             ->get();
+
+//        $studentAll = DB::table('students')
+//            ->where('status', 'active')
+//            ->paginate(10);
 
 //        dd($studentID->id);
         if($studentID== Null){
