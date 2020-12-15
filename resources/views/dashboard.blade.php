@@ -195,18 +195,21 @@
                     $('#switch').hide();
                     $('.switch3').show();
                     $('#switch2').show();
+                    $('#switch_inactief').hide();
                 })
                 $('#switch2').click(function() {
                     $('.switch1').show();
                     $('#switch').show();
                     $('.switch3').hide();
                     $('#switch2').hide();
+                    $('#switch_inactief').hide();
                 })
                 $('#switch3').click(function() {
                     $('#switch_inactief').show();
                     $('#switch4').show();
                     $('#switch3').hide();
                     $('.switch1').hide();
+                    $('.switch3').hide();
                 })
                 $('#switch4').click(function() {
                     $('.switch1').show();
