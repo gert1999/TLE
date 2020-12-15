@@ -151,7 +151,7 @@
                 if (confirm('Are you sure you want to save this thing into the database?')) {
                     // Save it!
                     console.log('Thing was saved to the database.');
-                    window.location.assign("/delete/{{$row->id}}");
+                    window.location.assign("/delete/@foreach($students as $row) {{$row->id}} @endforeach");
                 } else {
                     // Do nothing!
                     console.log('Thing was not saved to the database.');
