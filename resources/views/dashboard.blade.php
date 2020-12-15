@@ -18,6 +18,35 @@
     .switch3 {
         display: none;
     }
+
+    #switch4 {
+        display: none;
+        background-color: #3155ed;
+        border: none;
+        color: white;
+        padding: 9px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 10px 2px;
+        cursor: pointer;
+        float: right;
+        border-radius: 4px;
+    }
+    #switch3{
+        background-color: #3155ed;
+        border: none;
+        color: white;
+        padding: 9px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 10px 2px;
+        cursor: pointer;
+        float: right;
+        border-radius: 4px;
+    }
+
     #switch2 {
         display: none;
         background-color: #3155ed;
@@ -46,6 +75,9 @@
         border-radius: 4px;
     }
 
+    #switch_inactief{
+        display:none;
+    }
 
 
 </style>
@@ -75,6 +107,10 @@
             <tbody>
             <button id="switch">Toon alle leerlingen</button>
             <button id="switch2">Toon eigen klas</button>
+
+            <button id="switch3">Toon inactieve leerlingen</button>
+            <button id="switch4">Toon actieve leerlingen</button>
+
             @foreach($students as $row)
                 @if($row->status == 'active')
                     <tr class="switch1">
@@ -86,7 +122,7 @@
                             <a href="{{route('info', $row->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                             <a href="{{route('show', $row->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                             <button class="btn"><i class="fa fa-edit"></i></button>
-                            <button class="btn" onclick="alert()"><i class="fa fa-times"></i></button>
+                            <a href="{{url("/delete/$row->id")}}"><button class="btn" onclick="return confirm('Are you sure you want to delete this usere?');"><i class="fa fa-times"></i></button></a>
                         </td>
                         @if ($feeling[$row->id] >= 3)
                             <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
@@ -109,7 +145,7 @@
                         <a href="{{route('info', $row1->id)}}"> <button class="btn"><i class="fa fa-address-card"></i></button></a>
                         <a href="{{route('show', $row1->id)}}"><button class="btn"><i class="fa fa-signal"></i></button></a>
                         <button class="btn"><i class="fa fa-edit"></i></button>
-                        <button class="btn" onclick="alert()"><i class="fa fa-times"></i></button>
+                        <a href="{{url("/delete/$row->id")}}"><button class="btn"><i class="fa fa-times"></i></button></a>
                     </td>
                     @if ($feeling[$row1->id] >= 3)
                         <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
@@ -117,6 +153,27 @@
                         <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
                     @endif
                 </tr>
+            @endforeach
+
+            @foreach($students as $row)
+                @if($row->status == 'inactive')
+                    <tr id="switch_inactief">
+                        <th scope="row">{{$row->id}}</th>
+                        <td>{{$row->first_name}} {{$row->last_name}} </td>
+                        <td>{{$row->email}}</td>
+                        <td>{{$row->created_at}}</td>
+                        <td>
+                            <a href="{{url("/active/$row->id")}}"><button class="btn">Actief maken</button></a>
+                        </td>
+                        @if ($feeling[$row->id] >= 3)
+                            <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
+                        @else
+                            <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
+                        @endif
+                    </tr>
+                @else
+
+                @endif
             @endforeach
 
             </tbody>
@@ -144,6 +201,18 @@
                     $('#switch').show();
                     $('.switch3').hide();
                     $('#switch2').hide();
+                })
+                $('#switch3').click(function() {
+                    $('#switch_inactief').show();
+                    $('#switch4').show();
+                    $('#switch3').hide();
+                    $('.switch1').hide();
+                })
+                $('#switch4').click(function() {
+                    $('.switch1').show();
+                    $('#switch3').show();
+                    $('#switch4').hide();
+                    $('#switch_inactief').hide();
                 })
             });
 

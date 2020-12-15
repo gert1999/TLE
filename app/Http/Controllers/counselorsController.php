@@ -100,6 +100,16 @@ class counselorsController extends Controller
         return redirect('/dashboard');
     }
 
+    public function active($id){
+
+//        $feeling = Feelings::find($id);
+        DB::table('students')
+            ->where('id', $id)
+            ->update(['status' => 'active']);
+
+        return redirect('/dashboard');
+    }
+
     public function info($id){
 
         $students = DB::table('students')

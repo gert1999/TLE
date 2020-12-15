@@ -27,6 +27,8 @@ Route::get('/info/{student_id}', [counselorsController::class, 'info'])->name('i
 
 Route::get('/delete/{id}', [counselorsController::class, 'delete'])->name('delete');
 
+Route::get('/active/{id}', [counselorsController::class, 'active'])->name('active');
+
 Route::get('/dashboard/calendar', [calendarController::class, 'index'])->name('calendar');
 
 Route::get('/dashboard/load', [calendarController::class, 'load'])->name('load_calendar');
