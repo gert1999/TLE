@@ -55,7 +55,7 @@ class calendarController extends Controller
 ////                        ->where('first_name', $request->input('student'))
 //                        ->get();
             DB::table('appointments')->insert([
-                ['student_id' => $student_id_add, 'counselor_id' => auth()->user()->id, 'attending' => 0, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
+                ['student_id' => $student_id_add, 'counselor_id' => auth()->user()->id, 'attending' => 1, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
             ]);
 
         return redirect('/dashboard/calendar');
@@ -129,7 +129,7 @@ class calendarController extends Controller
 
         DB::table('appointments')
             ->where('id',  $student_id_aangevraagd)
-            ->update(['start_time' => $start_time_aangevraagd, 'end_time' => $end_time_aangevraagd]);
+            ->update(['start_time' => $start_time_aangevraagd, 'end_time' => $end_time_aangevraagd, 'attending' => 1]);
 
         return redirect('/dashboard/gesprekken/aangevraagd');
     }
