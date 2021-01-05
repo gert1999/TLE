@@ -115,8 +115,9 @@
                                 <p><b>ID:</b> {{$row->student_id}}</p>
                                 <p><b>Voornaam:</b> {{$row->first_name}}</p>
                                 <p><b>Achternaam:</b> {{$row->last_name}}</p>
-                                <p><b>Nickname:</b> {{$row->nickname}}</p>
                                 <p><b>Email:</b> {{$row->email}}</p>
+                                <p><b>Onderwerp:</b> {{$row->subject}}</p>
+                                <p><b>Bericht:</b> {{$row->message}}</p>
                                 <br>
                             </div>
                         </div>
