@@ -111,8 +111,7 @@
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="card1">
-                                <p><b>ID:</b> {{$row->student_id}}</p>
+                            <div class="card1" style="position:relative;top:13px;">
                                 <p><b>Voornaam:</b> {{$row->first_name}}</p>
                                 <p><b>Achternaam:</b> {{$row->last_name}}</p>
                                 <p><b>Email:</b> {{$row->email}}</p>
