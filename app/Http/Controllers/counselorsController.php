@@ -67,19 +67,19 @@ class counselorsController extends Controller
                 $feelingArray[] = $inbetween;
                 $feelingID[] = $IDbetween;
             }
-            //the code behind the warning signs. if a pupil fills in below 3 (sad faces) it adds one to the respective place in the feeling array
-            //if the pupil fills in 3 or higher (mediocre to happy) it resets the respective place in the feeling array to 0
-            if (count($feelingArray) >= 3) {
-                for ($i = count(($feelingArray)) - 3; $i < count($feelingArray); $i++) {
-                    if ($feelingArray[$i] < 3) {
-                        $feeling[$feelingID[$i]] = $feeling[$feelingID[$i]] + 1;
-                    } else {
-                        $feeling[$feelingID[$i]] = 0;
+                //the code behind the warning signs. if a pupil fills in below 3 (sad faces) it adds one to the respective place in the feeling array
+                //if the pupil fills in 3 or higher (mediocre to happy) it resets the respective place in the feeling array to 0
+                if (count($feelingArray) >= 3) {
+                    for ($i = 0; $i < count($feelingArray); $i++) {
+                        if ($feelingArray[$i] < 3) {
+                            $feeling[$feelingID[$i]] = $feeling[$feelingID[$i]] + 1;
+                        } else {
+                            $feeling[$feelingID[$i]] = 0;
+                        }
+
                     }
-
                 }
-            }
-
+            $feeling[13]= 4;
 
             return view('dashboard', compact('students', 'feeling', 'studentNumber', 'allStudents'));
         }

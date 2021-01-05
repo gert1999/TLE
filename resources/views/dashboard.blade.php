@@ -165,6 +165,7 @@
                         <td>
                             <a href="{{url("/active/$row->id")}}"><button class="btn">Actief maken</button></a>
                         </td>
+
                         @if ($feeling[$row->id] >= 3)
                             <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
                         @else
@@ -175,7 +176,6 @@
 
                 @endif
             @endforeach
-
             </tbody>
         </table>
     </div>
