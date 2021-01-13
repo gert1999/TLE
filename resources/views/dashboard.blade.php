@@ -148,7 +148,7 @@
                         <a href="{{url("/delete/$row->id")}}"><button class="btn"><i class="fa fa-times"></i></button></a>
                     </td>
                     @if ($feeling[$row1->id] >= 3)
-                        <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠️</td>
+                        <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠</td>
                     @else
                         <td data-toggle="tooltip" title="het gaat goed met de leerling">✔️</td>
                     @endif

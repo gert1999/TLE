@@ -45,9 +45,10 @@ class counselorsController extends Controller
         }else {
             //will get the list of feelings out of the database for each student of the counselor
             $feelings = DB::table('feelings')
-                ->where('student_id', $studentID->id)
+//                ->where('student_id', $studentID->id)
                 ->get();
 
+//            dd($feelings);
 
             $feelingArray = [];
             $feelingID = [];

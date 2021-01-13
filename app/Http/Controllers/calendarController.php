@@ -8,21 +8,24 @@ use Illuminate\Support\Facades\DB;
 
 class calendarController extends Controller
 {
+    // Agenda index page
     public function index(){
 
         return view('agenda.calendar');
     }
 
+    // Agenda load appointments
     public function load(){
         $data = array();
 
+        // Get events from database
         $events= DB::table('students')
             ->join('appointments', 'appointments.student_id', '=', 'students.id')
             ->where('appointments.counselor_id', auth()->user()->id)
             ->where('appointments.attending', 1)
-//            ->select('students.*')
             ->get();
 
+        // Make array for appointments
         foreach($events as $row)
         {
             $data[] = array(
@@ -35,9 +38,9 @@ class calendarController extends Controller
         }
 
         echo json_encode($data);
-//        dd($json_data);
     }
 
+    // Insert appointment in database
     public function insert(Request $request ){
         $datum = $request->input('datum');
         $start_time = $request->input('start_time');
@@ -48,19 +51,14 @@ class calendarController extends Controller
 
         $student_id_add = $request->input('student_id_add');
 
-//        $student = $request->input('student');
-
-//        $student_id = DB::table('students')
-//                        ->select("*", DB::raw("CONCAT('first_name', 'last_name') AS $student"))
-////                        ->where('first_name', $request->input('student'))
-//                        ->get();
-            DB::table('appointments')->insert([
-                ['student_id' => $student_id_add, 'counselor_id' => auth()->user()->id, 'attending' => 1, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
-            ]);
+        DB::table('appointments')->insert([
+            ['student_id' => $student_id_add, 'counselor_id' => auth()->user()->id, 'attending' => 1, 'subject' => '', 'start_time' => $datum_tijd_start, 'end_time' => $datum_tijd_end]
+        ]);
 
         return redirect('/dashboard/calendar');
     }
 
+    // Search student from database
     function fetch(Request $request){
         if($request->get('query')){
             $query = $request->get('query');
@@ -75,11 +73,13 @@ class calendarController extends Controller
             foreach($data as $row){
                 $output .= '<li style="cursor:pointer;">' .$row->first_name. ' ' .$row->last_name. '</li><input type="text" placeholder="Enter student" value="' .$row->id. '" name="student_id_add" required autocomplete="off" hidden>';
             }
+
             $output .= '</ul>';
             echo $output;
         }
     }
 
+    // Edit appointment
     function edit(Request $request){
 
         $start_time = $request->input('datum2'). ' ' .$request->input('start_time2');
@@ -95,19 +95,20 @@ class calendarController extends Controller
         return redirect('/dashboard/calendar');
     }
 
+    // Delete appointment from agenda
     function delete(Request $request){
         DB::table('appointments')->where('id', $request->input('student_id2'))->delete();
 
         return redirect('/dashboard/calendar');
     }
 
+    // Appointment aanvragen accepteren
     function aangevraagd(){
         $students = DB::table('students')
             ->join('appointments', 'students.id', '=', 'appointments.student_id')
             ->where('appointments.counselor_id', auth()->user()->id)
             ->where('appointments.start_time', Null)
             ->orWhere('appointments.start_time', '0000-00-00 00:00:00')
-//            ->select('students.*')
             ->get();
 
         $students_count = DB::table('students')
@@ -115,11 +116,12 @@ class calendarController extends Controller
             ->where('appointments.counselor_id', auth()->user()->id)
             ->where('appointments.start_time', Null)
             ->orWhere('appointments.start_time', '0000-00-00 00:00:00')
-//            ->select('students.*')
             ->count();
 
         return view('gesprekken.aangevraagd', compact('students', 'students_count'));
     }
+
+    // Appointment edit aanvragen to database
     function edit_aangevraagd(Request $request){
         $start_time_aangevraagd = $request->input('datum_aangevraagd'). ' ' .$request->input('start_time_aangevraagd');
 
