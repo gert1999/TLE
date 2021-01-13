@@ -88,7 +88,6 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
 {{--    Offset seen from top--}}
     <div class="container" style="margin-top:100px;">
     <div class="container">
@@ -110,7 +109,7 @@
 
             <button id="switch3">Toon inactieve leerlingen</button>
             <button id="switch4">Toon actieve leerlingen</button>
-
+            {{--    student list when active and own students are set--}}
             @foreach($students as $row)
                 @if($row->status == 'active')
                     <tr class="switch1">
@@ -134,7 +133,7 @@
 
                 @endif
             @endforeach
-
+            {{--    student list when students are set and all students are set.--}}
             @foreach($studentNumber as $row1)
                 <tr class="switch3">
                     <th scope="row">{{$row1->id}}</th>
@@ -147,6 +146,7 @@
                         <button class="btn"><i class="fa fa-edit"></i></button>
                         <a href="{{url("/delete/$row->id")}}"><button class="btn"><i class="fa fa-times"></i></button></a>
                     </td>
+
                     @if ($feeling[$row1->id] >= 3)
                         <td data-toggle="tooltip" title="de leerling heeft {{$feeling[$row1->id]}} opeenvolgende negatieve reacties geplaatst">⚠</td>
                     @else
@@ -154,7 +154,7 @@
                     @endif
                 </tr>
             @endforeach
-
+            {{--    student list when students are set to inactive--}}
             @foreach($students as $row)
                 @if($row->status == 'inactive')
                     <tr id="switch_inactief">
@@ -180,10 +180,12 @@
         </table>
     </div>
     </div>
+    {{--    this creates the happy footer--}}
         <footer class="page-footer">
         <div class="footer-copyright text-center py-3">© 2020 HAPPY
         </div>
     </footer>
+    {{--    these scripts allow the buttons switching between list states to work--}}
         <script>
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();

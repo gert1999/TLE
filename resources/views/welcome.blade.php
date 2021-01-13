@@ -21,6 +21,7 @@
         </style>
     </head>
     <body class="antialiased">
+    {{--    this page isn't used, but instead instantly redirects to the login page--}}
     <script>window.location = "/login";</script>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             @if (Route::has('login'))
