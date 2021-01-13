@@ -10,11 +10,12 @@
         </h2>
     </x-slot>
 
-    {{--    Offset seen from top--}}
+    {{--    This is the student's profile page. It is accessable through the first button on the main page's student list--}}
     <div class="container" style="margin-top:100px;">
 
         <div class="container">
             @foreach($students as $row)
+                {{--    this shows the avatar the student chose--}}
                 <div class="row rowcard">
                     <div class="col-4">
                     <div class="card">
@@ -41,6 +42,7 @@
                         </div>
                     </div>
                 </div>
+                    {{--    this shows the student's name at the top--}}
                     <div class="col-8">
                         <div class="card2">
                             <h1>Profiel :{{$row->first_name}} {{$row->last_name}}</h1>
@@ -48,6 +50,7 @@
                     </div>
                     <div class="col-4">
                     </div>
+                    {{--    all the student's info is shown in this part.--}}
                 <div class="col-3">
                     <div class="card1">
                         <p>Nickname: </p>

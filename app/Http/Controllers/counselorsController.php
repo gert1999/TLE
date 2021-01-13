@@ -45,7 +45,7 @@ class counselorsController extends Controller
         }else {
             //will get the list of feelings out of the database for each student of the counselor
             $feelings = DB::table('feelings')
-                ->where('student_id', $studentID->id)
+                //->where('student_id', $studentID->id)
                 ->get();
 
 
@@ -79,9 +79,14 @@ class counselorsController extends Controller
 
                     }
                 }
-            $feeling[13]= 4;
 
-            return view('dashboard', compact('students', 'feeling', 'studentNumber', 'allStudents'));
+                foreach ($feelings as $test)
+                {
+                    $weirds = $test;
+                    $weird[] = $weirds;
+                }
+
+            return view('dashboard', compact('students', 'feeling', 'studentNumber', 'allStudents', 'weird'));
         }
     }
     public function show($id){
